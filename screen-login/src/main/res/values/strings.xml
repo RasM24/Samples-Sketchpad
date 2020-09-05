@@ -1,3 +1,7 @@
 <resources>
 	<string name="app_login_name">Login Screen Sample</string>
+
+	<string name="auth_divider_or">OR</string>
+	<string name="auth_phone_hint">номер</string>
+	<string name="auth_code_hint">код</string>
 </resources>
