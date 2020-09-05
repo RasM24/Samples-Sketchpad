@@ -1,0 +1,9 @@
+.gradle
+.idea
+/gradle
+/gradle/wrapper
+**/build
+**/generated
+libs
+local.properties
+*.iml
