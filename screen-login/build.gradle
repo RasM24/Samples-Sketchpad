@@ -1,3 +1,12 @@
 dependencies {
 	implementation "com.google.android.material:material:${versions.material}"
+	implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+
+	implementation "ru.endroad:camp:${versions.camp}"
+	implementation "ru.endroad:mvi-core:${versions.mviCore}"
+	implementation "ru.endroad:fragment-navigation:${versions.fragmentNavigation}"
+
+	implementation "org.koin:koin-core:${versions.koin}"
+	implementation "org.koin:koin-core-ext:${versions.koin}"
+	implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 }

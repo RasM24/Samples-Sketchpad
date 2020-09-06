@@ -3,6 +3,7 @@
 	package="ru.endroad.samples.login">
 
 	<application
+		android:name=".application.App"
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_endroad_logo"
 		android:label="@string/app_login_name"

@@ -1,17 +1,16 @@
 package ru.endroad.samples.login.application
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import ru.endroad.libraries.camp.activity.CampActivity
+import ru.endroad.navigation.changeRoot
 import ru.endroad.samples.login.R
+import ru.endroad.samples.login.view.LoginFragment
 
-class SingleActivity : AppCompatActivity() {
+class SingleActivity : CampActivity() {
 
-	private val applicationThemeId = R.style.AppTheme
+	override val layout = R.layout.hub_activity
+	override val theme = R.style.AppTheme
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		setTheme(applicationThemeId)
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.hub_activity)
-
+	override fun onFirstCreate() {
+		supportFragmentManager.changeRoot(LoginFragment(), R.id.root)
 	}
 }
