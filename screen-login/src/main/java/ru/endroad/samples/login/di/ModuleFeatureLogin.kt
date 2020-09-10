@@ -1,5 +1,6 @@
 package ru.endroad.samples.login.di
 
+import androidx.preference.PreferenceManager
 import org.koin.androidx.viewmodel.dsl.setIsViewModel
 import org.koin.core.definition.BeanDefinition
 import org.koin.core.module.Module
@@ -10,6 +11,8 @@ import ru.endroad.samples.login.domain.*
 import ru.endroad.samples.login.view.LoginViewModel
 
 val moduleFeatureLogin = module {
+	single { PreferenceManager.getDefaultSharedPreferences(get()) }
+
 	single<SignWithFacebookUseCase>()
 	single<SignWithGoogleUseCase>()
 	single<SignWithVkontakteUseCase>()

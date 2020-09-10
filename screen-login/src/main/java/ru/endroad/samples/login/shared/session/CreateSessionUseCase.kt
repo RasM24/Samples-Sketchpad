@@ -1,7 +1,8 @@
 package ru.endroad.samples.login.shared.session
 
-class CreateSessionUseCase() {
+class CreateSessionUseCase(private val sessionDataSource: SessionDataSource) {
+
 	operator fun invoke(session: Session) {
-		TODO()
+		sessionDataSource.set(session)
 	}
 }

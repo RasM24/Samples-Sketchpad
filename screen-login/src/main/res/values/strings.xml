@@ -6,4 +6,5 @@
 	<string name="auth_code_hint">код</string>
 	<string name="login_agreement">Нажимая получить СМС-код, подтверждаю свое согласие с условиями Лицензионного Соглашения</string>
 	<string name="login_resend">Отправить снова</string>
+	<string name="logout_button">Выйти из профиля</string>
 </resources>
