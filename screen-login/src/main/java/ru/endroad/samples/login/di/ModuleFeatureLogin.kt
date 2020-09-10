@@ -5,9 +5,16 @@ import org.koin.core.definition.BeanDefinition
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.experimental.builder.create
+import org.koin.experimental.builder.single
+import ru.endroad.samples.login.domain.*
 import ru.endroad.samples.login.view.LoginViewModel
 
 val moduleFeatureLogin = module {
+	single<SignWithFacebookUseCase>()
+	single<SignWithGoogleUseCase>()
+	single<SignWithVkontakteUseCase>()
+	single<PhoneValidator>()
+
 	viewModel<LoginViewModel>()
 }
 

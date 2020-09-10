@@ -4,6 +4,8 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.endroad.samples.login.di.moduleFeatureLogin
+import ru.endroad.samples.login.shared.otp.moduleShareOtp
+import ru.endroad.samples.login.shared.session.moduleShareSession
 
 class App : Application() {
 
@@ -12,7 +14,11 @@ class App : Application() {
 
 		startKoin {
 			androidContext(this@App)
-			modules(moduleFeatureLogin)
+			modules(
+				moduleFeatureLogin,
+				moduleShareOtp,
+				moduleShareSession
+			)
 		}
 	}
 }
