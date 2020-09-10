@@ -7,6 +7,9 @@ import ru.endroad.libraries.camp.extension.hideViews
 import ru.endroad.libraries.camp.extension.showViews
 import ru.endroad.libraries.camp.fragment.CampFragment
 import ru.endroad.libraries.mvi.core.view.MviView
+import ru.endroad.navigation.changeRoot
+import ru.endroad.samples.login.R
+import ru.endroad.samples.login.application.StubFragment
 
 class LoginFragment : CampFragment(), MviView<LoginScreenState, LoginScreenEvent> {
 
@@ -46,7 +49,7 @@ class LoginFragment : CampFragment(), MviView<LoginScreenState, LoginScreenEvent
 			}
 
 			is LoginScreenState.VerifySuccess -> {
-				//startActivity(Intent(context, MainActivity::class.java))
+				parentFragmentManager.changeRoot(StubFragment(), R.id.root) //TODO вынести код в router
 			}
 		}
 	}
