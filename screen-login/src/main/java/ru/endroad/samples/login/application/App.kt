@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.endroad.samples.login.di.moduleFeatureLogin
+import ru.endroad.samples.login.router.di.moduleNavigation
 import ru.endroad.samples.login.shared.otp.moduleShareOtp
 import ru.endroad.samples.login.shared.session.moduleShareSession
 
@@ -17,7 +18,8 @@ class App : Application() {
 			modules(
 				moduleFeatureLogin,
 				moduleShareOtp,
-				moduleShareSession
+				moduleShareSession,
+				moduleNavigation
 			)
 		}
 	}
