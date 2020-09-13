@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.endroad.libraries.mvi.core.viewmodel.PresenterMvi
-import ru.endroad.samples.login.shared.session.Session
 import ru.endroad.samples.login.domain.*
+import ru.endroad.samples.login.router.routers.LoginRouter
 import ru.endroad.samples.login.shared.otp.CheckOtpCodeUseCase
 import ru.endroad.samples.login.shared.otp.SendOtpCodeUseCase
 import ru.endroad.samples.login.shared.otp.VerificationCodeValidator
 import ru.endroad.samples.login.shared.session.CreateSessionUseCase
+import ru.endroad.samples.login.shared.session.Session
 
 //TODO Не хватает обработчика ошибок
 class LoginViewModel(
@@ -21,7 +22,8 @@ class LoginViewModel(
 	private val signWithGoogle: SignWithGoogleUseCase,
 	private val signWithVkontakte: SignWithVkontakteUseCase,
 	private val phoneValidator: PhoneValidator,
-	private val verificationCodeValidator: VerificationCodeValidator
+	private val verificationCodeValidator: VerificationCodeValidator,
+	private val router: LoginRouter
 ) : PresenterMvi<LoginScreenState, LoginScreenEvent>, ViewModel() {
 
 	override val state = MutableLiveData<LoginScreenState>().apply {
@@ -35,7 +37,7 @@ class LoginViewModel(
 				LoginScreenEvent.ClickGoogleSign      -> signWithGoogle()
 				LoginScreenEvent.ClickVkontakteSign   -> signWithVkontakte()
 				is LoginScreenEvent.ClickSendOtpCode  -> state.value = event.reduce()
-				is LoginScreenEvent.ClickCheckOtpCode -> state.value = event.reduce()
+				is LoginScreenEvent.ClickCheckOtpCode -> event.reduce()
 				is LoginScreenEvent.ClickResendCode   -> state.value = event.reduce()
 				is LoginScreenEvent.ChangeCode        -> state.value = event.reduce()
 				is LoginScreenEvent.ChangePhone       -> state.value = event.reduce()
@@ -58,10 +60,10 @@ class LoginViewModel(
 		return LoginScreenState.VerifyCode(isCodeValidate = false)
 	}
 
-	private suspend fun LoginScreenEvent.ClickCheckOtpCode.reduce(): LoginScreenState {
+	private suspend fun LoginScreenEvent.ClickCheckOtpCode.reduce() {
 		val credential = checkOtpCode(code)
 		createSession(Session(credential.token))
-		return LoginScreenState.VerifySuccess()
+		router.openMainScreen()
 	}
 
 	private suspend fun LoginScreenEvent.ClickResendCode.reduce(): LoginScreenState {

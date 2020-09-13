@@ -1,12 +1,11 @@
 package ru.endroad.samples.login.application
 
+import android.os.Bundle
 import org.koin.android.ext.android.inject
 import ru.endroad.libraries.camp.activity.CampActivity
-import ru.endroad.navigation.changeRoot
 import ru.endroad.samples.login.R
 import ru.endroad.samples.login.router.navigator.Navigator
-import ru.endroad.samples.login.shared.session.IsAuthorizedUseCase
-import ru.endroad.samples.login.view.LoginFragment
+import ru.endroad.samples.login.router.routers.MainRouter
 
 class SingleActivity : CampActivity() {
 
@@ -14,25 +13,19 @@ class SingleActivity : CampActivity() {
 	override val theme = R.style.AppTheme
 
 	val navigator: Navigator by inject()
+	val mainRouter: MainRouter by inject()
 
-	val isAuthorized: IsAuthorizedUseCase by inject()
-
-	override fun onStart() {
-		super.onStart()
-		navigator.fragmentManager = supportFragmentManager
+	override fun onCreate(savedInstanceState: Bundle?) {
+		navigator.hubActivity = this
+		super.onCreate(savedInstanceState)
 	}
 
 	override fun onDestroy() {
+		navigator.hubActivity = null
 		super.onDestroy()
-		navigator.fragmentManager = null
 	}
 
-	//TODO вынести код в router
 	override fun onFirstCreate() {
-		if (isAuthorized()) {
-			supportFragmentManager.changeRoot(StubFragment(), R.id.root)//TODO вынести в router
-		} else {
-			supportFragmentManager.changeRoot(LoginFragment(), R.id.root)
-		}
+		mainRouter.openFirstScreen()
 	}
 }

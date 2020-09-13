@@ -1,8 +1,9 @@
 package ru.endroad.samples.login.router.navigator
 
 import androidx.annotation.IdRes
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatActivity
 
 class RootNavigator(@IdRes override val container: Int) : Navigator {
-	override var fragmentManager: FragmentManager? = null
+
+	override var hubActivity: AppCompatActivity? = null
 }

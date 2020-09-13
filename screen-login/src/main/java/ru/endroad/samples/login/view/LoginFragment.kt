@@ -7,9 +7,6 @@ import ru.endroad.libraries.camp.extension.hideViews
 import ru.endroad.libraries.camp.extension.showViews
 import ru.endroad.libraries.camp.fragment.CampFragment
 import ru.endroad.libraries.mvi.core.view.MviView
-import ru.endroad.navigation.changeRoot
-import ru.endroad.samples.login.R
-import ru.endroad.samples.login.application.StubFragment
 
 class LoginFragment : CampFragment(), MviView<LoginScreenState, LoginScreenEvent> {
 
@@ -33,7 +30,7 @@ class LoginFragment : CampFragment(), MviView<LoginScreenState, LoginScreenEvent
 
 	override fun render(state: LoginScreenState) {
 		when (state) {
-			is LoginScreenState.Initialized   -> {
+			is LoginScreenState.Initialized -> {
 				showViews(input_layout_phone, sign_phone, text_agreement)
 				hideViews(resend, input_layout_code)
 				sign_phone.text = "Отправить код"
@@ -41,15 +38,11 @@ class LoginFragment : CampFragment(), MviView<LoginScreenState, LoginScreenEvent
 				sign_phone.setOnClickListener { presenter.reduce(LoginScreenEvent.ClickSendOtpCode(input_phone.text.toString())) }
 			}
 
-			is LoginScreenState.VerifyCode    -> {
+			is LoginScreenState.VerifyCode  -> {
 				showViews(input_layout_phone, input_layout_code, sign_phone, resend, text_agreement)
 				sign_phone.text = "Войти"
 				sign_phone.isEnabled = state.isCodeValidate
 				sign_phone.setOnClickListener { presenter.reduce(LoginScreenEvent.ClickCheckOtpCode(input_code.text.toString())) }
-			}
-
-			is LoginScreenState.VerifySuccess -> {
-				parentFragmentManager.changeRoot(StubFragment(), R.id.root) //TODO вынести код в router
 			}
 		}
 	}
