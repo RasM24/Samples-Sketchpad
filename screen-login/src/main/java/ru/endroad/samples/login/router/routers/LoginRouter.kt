@@ -13,4 +13,8 @@ class LoginRouter(private val navigatorHolder: Navigator) {
 	fun openMainScreen() {
 		navigatorHolder.changeRoot(StubFragment())
 	}
+
+	fun openErrorScreen(message: String) {
+		navigatorHolder.openNoticeAlertDialog(message)
+	}
 }

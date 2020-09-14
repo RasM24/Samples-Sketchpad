@@ -1,6 +1,7 @@
 package ru.endroad.samples.login.shared.otp
 
 import kotlinx.coroutines.*
+import ru.endroad.samples.login.error.DomainError
 import kotlin.random.Random
 
 interface OtpDataSource {
@@ -44,7 +45,7 @@ class OtpMockDataSource(
 		if (code == verificationCode) {
 			return Credential(MOCK_USER_TOKEN)
 		} else {
-			throw RuntimeException("Ошибка авторизации") //TODO доработать в задаче с обработкой ошибок
+			throw DomainError.WrongOtp("Введен неверный код верификации")
 		}
 	}
 

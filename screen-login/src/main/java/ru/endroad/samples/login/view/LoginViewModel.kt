@@ -1,11 +1,14 @@
 package ru.endroad.samples.login.view
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import ru.endroad.libraries.mvi.core.viewmodel.PresenterMvi
 import ru.endroad.samples.login.domain.*
+import ru.endroad.samples.login.error.DomainError
 import ru.endroad.samples.login.router.routers.LoginRouter
 import ru.endroad.samples.login.shared.otp.CheckOtpCodeUseCase
 import ru.endroad.samples.login.shared.otp.SendOtpCodeUseCase
@@ -13,7 +16,6 @@ import ru.endroad.samples.login.shared.otp.VerificationCodeValidator
 import ru.endroad.samples.login.shared.session.CreateSessionUseCase
 import ru.endroad.samples.login.shared.session.Session
 
-//TODO Не хватает обработчика ошибок
 class LoginViewModel(
 	private val sendOtpCode: SendOtpCodeUseCase,
 	private val checkOtpCode: CheckOtpCodeUseCase,
@@ -31,7 +33,7 @@ class LoginViewModel(
 	}
 
 	override fun reduce(event: LoginScreenEvent) {
-		viewModelScope.launch {
+		viewModelScope.launch(exceptionHandler) {
 			when (event) {
 				LoginScreenEvent.ClickFacebookSign    -> signWithFacebook()
 				LoginScreenEvent.ClickGoogleSign      -> signWithGoogle()
@@ -69,5 +71,12 @@ class LoginViewModel(
 	private suspend fun LoginScreenEvent.ClickResendCode.reduce(): LoginScreenState {
 		sendOtpCode(phone)
 		return LoginScreenState.VerifyCode(isCodeValidate = false)
+	}
+
+	val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+		when (exception) {
+			is DomainError.WrongOtp -> router.openErrorScreen(exception.message ?: "")
+			else                    -> Log.e("LoginScreen", exception.message ?: "")
+		}
 	}
 }

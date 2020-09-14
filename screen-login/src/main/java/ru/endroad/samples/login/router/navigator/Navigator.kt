@@ -1,5 +1,6 @@
 package ru.endroad.samples.login.router.navigator
 
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.endroad.navigation.*
@@ -22,5 +23,15 @@ interface Navigator {
 
 	fun back() {
 		hubActivity?.supportFragmentManager?.back()
+	}
+
+	fun openNoticeAlertDialog(message: String) {
+		hubActivity?.let(AlertDialog::Builder)?.apply {
+			setMessage(message)
+			setCancelable(true)
+			setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+		}
+			?.create()
+			?.show()
 	}
 }
