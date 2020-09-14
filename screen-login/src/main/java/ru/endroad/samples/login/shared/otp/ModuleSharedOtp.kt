@@ -7,6 +7,7 @@ import org.koin.experimental.builder.singleBy
 val moduleShareOtp = module {
 	singleBy<OtpDataSource, OtpMockDataSource>()
 	singleBy<NotificationService, OtpNotificationService>()
+	singleBy<OtpCodeGenerator, RandomOtpCodeGenerator>()
 
 	single<SendOtpCodeUseCase>()
 	single<CheckOtpCodeUseCase>()

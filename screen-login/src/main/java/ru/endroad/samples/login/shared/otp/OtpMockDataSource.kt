@@ -2,7 +2,6 @@ package ru.endroad.samples.login.shared.otp
 
 import kotlinx.coroutines.*
 import ru.endroad.samples.login.error.DomainError
-import kotlin.random.Random
 
 interface OtpDataSource {
 	suspend fun sendOtp(phone: String)
@@ -11,20 +10,17 @@ interface OtpDataSource {
 }
 
 class OtpMockDataSource(
-	private val notificationService: NotificationService
+	private val notificationService: NotificationService,
+	private val otpCodeGenerator: OtpCodeGenerator
 ) : OtpDataSource {
 
 	private companion object {
-		const val MIN_CODE = 100_000
-		const val MAX_CODE = 999_999
 		const val CODE_LIFETIME_IN_MILLIS = 20000L
 		const val MOCK_USER_TOKEN = "Go4rMeygtsZb8rvbxnzA"
 	}
 
 	private var verificationCode: String? = null
 	private var lastTimeGenerateCode: Long? = null
-
-	private val randomCode: String get() = Random.nextInt(MIN_CODE, MAX_CODE).toString()
 
 	override suspend fun sendOtp(phone: String) {
 		generateExpiringCode()
@@ -33,7 +29,7 @@ class OtpMockDataSource(
 	}
 
 	private fun generateExpiringCode() {
-		verificationCode = randomCode
+		verificationCode = otpCodeGenerator.generate()
 		CoroutineScope(Dispatchers.IO).launch {
 			delay(CODE_LIFETIME_IN_MILLIS)
 			verificationCode = null
