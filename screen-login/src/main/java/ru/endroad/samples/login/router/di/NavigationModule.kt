@@ -7,10 +7,12 @@ import ru.endroad.samples.login.router.navigator.Navigator
 import ru.endroad.samples.login.router.navigator.RootNavigator
 import ru.endroad.samples.login.router.routers.LoginRouter
 import ru.endroad.samples.login.router.routers.MainRouter
+import ru.endroad.samples.login.router.routers.MockSocialSignRouter
 
 val moduleNavigation = module {
 	single<Navigator> { RootNavigator(R.id.root) }
 
 	single<MainRouter>()
 	single<LoginRouter>()
+	single<MockSocialSignRouter>()
 }

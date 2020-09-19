@@ -95,4 +95,77 @@ class LoginTest {
 			isDisplayed()
 		}
 	}
+
+	@Test
+	fun socialSignSuccessTest() {
+		activityRule.launchActivity(null)
+
+		LoginScreen {
+			signFb.click()
+			dialog {
+				title.hasText("Facebook")
+				message.hasText("Имитация экрана входа с помощью социальной сети")
+				positiveButton.click()
+			}
+		}
+		StubScreen {
+			logoutButton.click()
+		}
+
+		LoginScreen {
+			signVk.click()
+			dialog {
+				title.hasText("Vkontakte")
+				message.hasText("Имитация экрана входа с помощью социальной сети")
+				positiveButton.click()
+			}
+		}
+		StubScreen {
+			logoutButton.click()
+		}
+
+		LoginScreen {
+			signGoogle.click()
+			dialog {
+				title.hasText("Google")
+				message.hasText("Имитация экрана входа с помощью социальной сети")
+				positiveButton.click()
+			}
+		}
+		StubScreen {
+			logoutButton.click()
+		}
+	}
+
+	@Test
+	fun socialSignErrorTest() {
+		activityRule.launchActivity(null)
+
+		LoginScreen {
+			signFb.click()
+			dialog.negativeButton.click()
+			dialog {
+				message.hasText("Ошибка авторизации")
+				positiveButton.click()
+			}
+		}
+
+		LoginScreen {
+			signVk.click()
+			dialog.negativeButton.click()
+			dialog {
+				message.hasText("Ошибка авторизации")
+				positiveButton.click()
+			}
+		}
+
+		LoginScreen {
+			signGoogle.click()
+			dialog.negativeButton.click()
+			dialog {
+				message.hasText("Ошибка авторизации")
+				positiveButton.click()
+			}
+		}
+	}
 }

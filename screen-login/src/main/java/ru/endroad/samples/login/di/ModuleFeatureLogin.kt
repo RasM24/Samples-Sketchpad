@@ -8,6 +8,9 @@ import org.koin.dsl.module
 import org.koin.experimental.builder.create
 import org.koin.experimental.builder.single
 import ru.endroad.samples.login.domain.*
+import ru.endroad.samples.login.shared.social.SignWithFacebookUseCase
+import ru.endroad.samples.login.shared.social.SignWithGoogleUseCase
+import ru.endroad.samples.login.shared.social.SignWithVkontakteUseCase
 import ru.endroad.samples.login.view.LoginViewModel
 
 val moduleFeatureLogin = module {

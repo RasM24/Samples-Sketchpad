@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import ru.endroad.libraries.mvi.core.viewmodel.PresenterMvi
-import ru.endroad.samples.login.domain.*
+import ru.endroad.samples.login.domain.PhoneValidator
 import ru.endroad.samples.login.error.DomainError
 import ru.endroad.samples.login.router.routers.LoginRouter
 import ru.endroad.samples.login.shared.otp.CheckOtpCodeUseCase
@@ -15,6 +15,9 @@ import ru.endroad.samples.login.shared.otp.SendOtpCodeUseCase
 import ru.endroad.samples.login.shared.otp.VerificationCodeValidator
 import ru.endroad.samples.login.shared.session.CreateSessionUseCase
 import ru.endroad.samples.login.shared.session.Session
+import ru.endroad.samples.login.shared.social.SignWithFacebookUseCase
+import ru.endroad.samples.login.shared.social.SignWithGoogleUseCase
+import ru.endroad.samples.login.shared.social.SignWithVkontakteUseCase
 
 class LoginViewModel(
 	private val sendOtpCode: SendOtpCodeUseCase,
@@ -35,9 +38,9 @@ class LoginViewModel(
 	override fun reduce(event: LoginScreenEvent) {
 		viewModelScope.launch(exceptionHandler) {
 			when (event) {
-				LoginScreenEvent.ClickFacebookSign    -> signWithFacebook()
-				LoginScreenEvent.ClickGoogleSign      -> signWithGoogle()
-				LoginScreenEvent.ClickVkontakteSign   -> signWithVkontakte()
+				LoginScreenEvent.ClickFacebookSign    -> successLogin(signWithFacebook().token)
+				LoginScreenEvent.ClickGoogleSign      -> successLogin(signWithGoogle().token)
+				LoginScreenEvent.ClickVkontakteSign   -> successLogin(signWithVkontakte().token)
 				is LoginScreenEvent.ClickSendOtpCode  -> state.value = event.reduce()
 				is LoginScreenEvent.ClickCheckOtpCode -> event.reduce()
 				is LoginScreenEvent.ClickResendCode   -> state.value = event.reduce()
@@ -64,8 +67,7 @@ class LoginViewModel(
 
 	private suspend fun LoginScreenEvent.ClickCheckOtpCode.reduce() {
 		val credential = checkOtpCode(code)
-		createSession(Session(credential.token))
-		router.openMainScreen()
+		successLogin(credential.token)
 	}
 
 	private suspend fun LoginScreenEvent.ClickResendCode.reduce(): LoginScreenState {
@@ -73,10 +75,16 @@ class LoginViewModel(
 		return LoginScreenState.VerifyCode(isCodeValidate = false)
 	}
 
+	private fun successLogin(token: String) {
+		createSession(Session(token))
+		router.openMainScreen()
+	}
+
 	val exceptionHandler = CoroutineExceptionHandler { _, exception ->
 		when (exception) {
-			is DomainError.WrongOtp -> router.openErrorScreen(exception.message ?: "")
-			else                    -> Log.e("LoginScreen", exception.message ?: "")
+			is DomainError.WrongOtp     -> router.openErrorScreen(exception.message ?: "")
+			is DomainError.Unauthorized -> router.openErrorScreen(exception.message ?: "")
+			else                        -> Log.e("LoginScreen", exception.message ?: "")
 		}
 	}
 }
