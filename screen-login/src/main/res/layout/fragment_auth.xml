@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tool="http://schemas.android.com/tools"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/input_layout_phone"
+			style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="16dp"
+			android:layout_marginTop="32dp"
+			android:hint="@string/auth_phone_hint"
+			app:helperText="На этот номер придет код"
+			app:helperTextEnabled="true"
+			app:layout_constraintBottom_toTopOf="@id/input_layout_code"
+			app:layout_constraintEnd_toEndOf="@id/sign_phone"
+			app:layout_constraintStart_toStartOf="@id/sign_phone"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintWidth_percent="0.7">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/input_phone"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:digits="1234567890+-() "
+				android:inputType="phone" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:id="@+id/input_layout_code"
+			style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="16dp"
+			android:hint="@string/auth_code_hint"
+			app:counterEnabled="true"
+			app:counterMaxLength="6"
+			app:helperTextEnabled="true"
+			app:layout_constraintBottom_toTopOf="@id/resend"
+			app:layout_constraintEnd_toEndOf="@id/sign_phone"
+			app:layout_constraintStart_toStartOf="@id/sign_phone"
+			tool:helperText="Отправить повторно код через 120 сек.">
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/input_code"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="number"
+				android:maxLength="6"
+				android:singleLine="true" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+
+		<TextView
+			android:id="@+id/divider_or"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/auth_divider_or"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_bias="0.7" />
+
+		<View
+			android:id="@+id/divider_left"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="8dp"
+			android:layout_marginStart="32dp"
+			android:background="@drawable/auth_divider_left"
+			app:layout_constraintBottom_toBottomOf="@id/divider_or"
+			app:layout_constraintEnd_toStartOf="@id/divider_or"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/divider_or" />
+
+		<View
+			android:id="@+id/divider_right"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="32dp"
+			android:layout_marginStart="8dp"
+			android:background="@drawable/auth_divider_right"
+			app:layout_constraintBottom_toBottomOf="@id/divider_or"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/divider_or"
+			app:layout_constraintTop_toTopOf="@id/divider_or" />
+
+		<ImageButton
+			android:id="@+id/sign_fb"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/ic_facebook"
+			app:layout_constraintEnd_toEndOf="@+id/divider_right"
+			app:layout_constraintStart_toEndOf="@+id/sign_google"
+			app:layout_constraintTop_toTopOf="@+id/sign_google" />
+
+		<ImageButton
+			android:id="@+id/sign_vk"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/ic_vk"
+			app:layout_constraintEnd_toStartOf="@+id/sign_google"
+			app:layout_constraintStart_toStartOf="@+id/divider_left"
+			app:layout_constraintTop_toTopOf="@+id/sign_google" />
+
+		<ImageButton
+			android:id="@+id/sign_google"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="24dp"
+			android:background="@drawable/ic_google_plus"
+			app:layout_constraintEnd_toStartOf="@id/sign_fb"
+			app:layout_constraintStart_toEndOf="@id/sign_vk"
+			app:layout_constraintTop_toBottomOf="@id/divider_or" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/sign_phone"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="24dp"
+			app:layout_constraintBottom_toTopOf="@id/divider_or"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintWidth_percent="0.7" />
+
+		<TextView
+			android:id="@+id/text_agreement"
+			style="@style/TextAppearance.MaterialComponents.Caption"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="16dp"
+			android:text="@string/login_agreement"
+			app:layout_constraintBottom_toTopOf="@id/sign_phone"
+			app:layout_constraintEnd_toEndOf="@+id/sign_phone"
+			app:layout_constraintStart_toStartOf="@+id/sign_phone" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/resend"
+			style="@style/Widget.MaterialComponents.Button.TextButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:text="@string/login_resend"
+			app:layout_constraintBottom_toTopOf="@id/text_agreement"
+			app:layout_constraintEnd_toEndOf="@+id/sign_phone"
+			app:layout_constraintStart_toStartOf="@+id/sign_phone" />
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
