@@ -5,6 +5,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.endroad.libraries.camp.fragment.CampFragment
 import ru.endroad.libraries.mvi.core.view.MviView
 import ru.endroad.samples.screen.listing.R
+import ru.endroad.samples.screen.listing.view.adapter.ListingAdapter
 
 class ListingFragment : CampFragment(), MviView<ListingScreenState, ListingScreenEvent> {
 
@@ -12,10 +13,16 @@ class ListingFragment : CampFragment(), MviView<ListingScreenState, ListingScree
 
 	override val presenter by viewModel<ListingViewModel>()
 
+	private val adapter = ListingAdapter()
+
 	override fun setupViewComponents() {
 		bindRenderState(this)
 		list.adapter = adapter
 	}
 
-	override fun render(state: ListingScreenState) = Unit
+	override fun render(state: ListingScreenState) {
+		when (state) {
+			is ListingScreenState.DataLoaded -> adapter.items = state.items
+		}
+	}
 }
