@@ -1,6 +1,9 @@
 package ru.endroad.samples.screen.listing.shared.metadata
 
 enum class Country(val description: String) {
+	USR("СССР"),
+	RUS("Россия"),
+	UKR("Украина"),
 	USA("США"),
 	GBR("Великобритания"),
 	FRA("Франция"),
