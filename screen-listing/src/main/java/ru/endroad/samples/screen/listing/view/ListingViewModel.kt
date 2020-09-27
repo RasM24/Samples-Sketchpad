@@ -2,13 +2,39 @@ package ru.endroad.samples.screen.listing.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import ru.endroad.libraries.mvi.core.viewmodel.PresenterMvi
+import ru.endroad.samples.screen.listing.shared.listing.MakeItemListUseCase
+import ru.endroad.samples.screen.listing.shared.movies.GetMoviesUseCase
+import ru.endroad.samples.screen.listing.shared.series.GetSeriesListUseCase
 
 class ListingViewModel(
-
+	private val makeItemList: MakeItemListUseCase,
+	private val getMovies: GetMoviesUseCase,
+	private val getSeriesList: GetSeriesListUseCase
 ) : PresenterMvi<ListingScreenState, ListingScreenEvent>, ViewModel() {
 
 	override val state = MutableLiveData<ListingScreenState>()
 
-	override fun reduce(event: ListingScreenEvent) = Unit
+	init {
+		reduce(ListingScreenEvent.FetchData())
+	}
+
+	override fun reduce(event: ListingScreenEvent) {
+		viewModelScope.launch {
+			when (event) {
+				is ListingScreenEvent.FetchData -> state.value = event.reduce()
+			}
+		}
+	}
+
+	private suspend fun ListingScreenEvent.FetchData.reduce(): ListingScreenState {
+		val movies = viewModelScope.async { getMovies() }
+		val series = viewModelScope.async { getSeriesList() }
+
+		val itemList = makeItemList(movies = movies.await(), series = series.await(), promo = null)
+		return ListingScreenState.DataLoaded(itemList)
+	}
 }

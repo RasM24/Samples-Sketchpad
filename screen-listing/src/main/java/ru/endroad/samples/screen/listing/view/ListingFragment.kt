@@ -1,5 +1,6 @@
 package ru.endroad.samples.screen.listing.view
 
+import kotlinx.android.synthetic.main.fragment_listing.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.endroad.libraries.camp.fragment.CampFragment
 import ru.endroad.libraries.mvi.core.view.MviView
@@ -13,6 +14,7 @@ class ListingFragment : CampFragment(), MviView<ListingScreenState, ListingScree
 
 	override fun setupViewComponents() {
 		bindRenderState(this)
+		list.adapter = adapter
 	}
 
 	override fun render(state: ListingScreenState) = Unit
