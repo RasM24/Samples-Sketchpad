@@ -5,9 +5,13 @@ import org.koin.core.definition.BeanDefinition
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.experimental.builder.create
+import org.koin.experimental.builder.single
+import ru.endroad.samples.screen.listing.shared.listing.MakeItemListUseCase
 import ru.endroad.samples.screen.listing.view.ListingViewModel
 
-val moduleFeatureLogin = module {
+val moduleFeatureListing = module {
+	single<MakeItemListUseCase>()
+
 	viewModel<ListingViewModel>()
 }
 
