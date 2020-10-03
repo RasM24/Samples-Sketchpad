@@ -1,3 +1,17 @@
 <resources>
 	<string name="app_listing_name">Listing Screen Sample</string>
+
+	<plurals name="plurals_episode_name">
+		<item quantity="one">%1$d эпизод</item>
+		<item quantity="few">%1$d эпизода</item>
+		<item quantity="many">%1$d эпизодов</item>
+		<item quantity="other">%1$d эпизодов</item>
+	</plurals>
+
+	<plurals name="plurals_season_name">
+		<item quantity="one">%1$d сезон</item>
+		<item quantity="few">%1$d сезона</item>
+		<item quantity="many">%1$d сезонов</item>
+		<item quantity="other">%1$d сезонов</item>
+	</plurals>
 </resources>
