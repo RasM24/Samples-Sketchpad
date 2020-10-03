@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="wrap_content"
+	android:paddingTop="16dp"
+	android:paddingBottom="8dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+	<TextView
+		android:id="@+id/section_title"
+		style="@style/TextAppearance.AppCompat.Large.Inverse"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/colorPrimaryDark"
+		android:paddingBottom="8dp"
+		android:paddingEnd="24dp"
+		android:paddingStart="24dp"
+		android:paddingTop="8dp"
+		tools:text="Сериалы" />
+</FrameLayout>
