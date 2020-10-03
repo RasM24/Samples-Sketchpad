@@ -14,7 +14,7 @@ class MakeItemListUseCase {
 	operator fun invoke(
 		movies: List<Movie>?,
 		series: List<Series>?,
-		promo: Promo?
+		promo: List<Promo>?
 	): List<ListingItem> =
 		mutableListOf<ListingItem>().apply {
 			promo?.let(::PromoItem)?.let(::add)
