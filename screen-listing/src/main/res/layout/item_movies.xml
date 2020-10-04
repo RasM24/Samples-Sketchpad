@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:padding="8dp">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<ImageView
+			android:id="@+id/poster"
+			android:layout_width="80dp"
+			android:layout_height="100dp"
+			android:layout_margin="16dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:srcCompat="@tools:sample/avatars" />
+
+		<TextView
+			android:id="@+id/name"
+			style="@style/TextAppearance.MaterialComponents.Body1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			app:layout_constraintStart_toEndOf="@+id/poster"
+			app:layout_constraintTop_toTopOf="@+id/poster"
+			tools:text="Чужой" />
+
+		<TextView
+			android:id="@+id/release_year"
+			style="@style/TextAppearance.MaterialComponents.Overline"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			app:layout_constraintStart_toStartOf="@+id/name"
+			app:layout_constraintTop_toBottomOf="@+id/name"
+			tools:text="1982" />
+
+		<TextView
+			android:id="@+id/genre"
+			style="@style/TextAppearance.MaterialComponents.Caption"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="16dp"
+			app:layout_constraintBottom_toBottomOf="@+id/poster"
+			app:layout_constraintStart_toEndOf="@+id/poster"
+			tools:text="Фантастика" />
+
+		<TextView
+			android:id="@+id/country"
+			style="@style/TextAppearance.MaterialComponents.Caption"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="3dp"
+			app:layout_constraintStart_toEndOf="@+id/point"
+			app:layout_constraintTop_toTopOf="@+id/genre"
+			tools:text="США" />
+
+		<TextView
+			android:id="@+id/rating"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingStart="8dp"
+			app:layout_constraintBaseline_toBaselineOf="@id/name"
+			app:layout_constraintStart_toEndOf="@+id/name"
+			tools:layout_editor_absoluteY="110dp"
+			tools:text="8.0" />
+
+		<ImageView
+			android:id="@+id/point"
+			android:layout_width="6dp"
+			android:layout_height="6dp"
+			android:layout_marginBottom="3dp"
+			android:layout_marginStart="3dp"
+			app:layout_constraintBottom_toBottomOf="@+id/genre"
+			app:layout_constraintStart_toEndOf="@+id/genre"
+			app:srcCompat="@drawable/point" />
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
