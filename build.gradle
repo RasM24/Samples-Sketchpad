@@ -15,13 +15,7 @@ allprojects {
 	repositories {
 		google()
 		jcenter()
-		maven {
-			credentials {
-				username artifactory_user
-				password artifactory_password
-			}
-			url = "https://endroad.jfrog.io/artifactory/gradle-release-local/"
-		}
+		mavenLocal()
 	}
 }
 
