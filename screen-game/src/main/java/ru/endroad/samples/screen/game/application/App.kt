@@ -3,6 +3,7 @@ package ru.endroad.samples.screen.game.application
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import ru.endroad.samples.screen.game.shared.engine.moduleEngine
 import ru.endroad.samples.screen.game.router.di.moduleNavigation
 import ru.endroad.samples.screen.game.shared.configuration.moduleConfigurationWorld
 import ru.endroad.samples.screen.game.shared.generation.moduleGenerationWorld
@@ -20,6 +21,7 @@ class App : Application() {
 				moduleNavigation,
 				moduleConfigurationWorld,
 				moduleGenerationWorld,
+				moduleEngine,
 			)
 		}
 	}
