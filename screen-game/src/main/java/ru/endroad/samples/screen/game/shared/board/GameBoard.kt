@@ -15,6 +15,12 @@ class GameBoard(
 		return subjects
 	}
 
+	fun getAnimals(): List<Animal> {
+		val animals = mutableListOf<Animal>()
+		area.forEachAll { if (it is Animal) it.let(animals::add) }
+		return animals
+	}
+
 	fun getField(): Field<Subject?> =
 		area
 

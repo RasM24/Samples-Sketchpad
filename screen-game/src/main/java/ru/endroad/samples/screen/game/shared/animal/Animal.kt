@@ -6,8 +6,11 @@ sealed class Animal : Subject
 
 data class Grampus(
 	override val id: Int,
-) : Animal()
+	override val pregnancy: Pregnancy,
+	override val hunger: Hunger,
+) : Animal(), Predator, Pregnant, Hungry
 
 data class Penguin(
 	override val id: Int,
-) : Animal()
+	override val pregnancy: Pregnancy,
+) : Animal(), Pregnant
