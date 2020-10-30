@@ -6,7 +6,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:3.6.4'
+		classpath 'com.android.tools.build:gradle:4.1.0'
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 	}
 }
@@ -15,17 +15,11 @@ allprojects {
 	repositories {
 		google()
 		jcenter()
-		maven {
-			credentials {
-				username artifactory_user
-				password artifactory_password
-			}
-			url = "https://endroad.jfrog.io/artifactory/gradle-release-local/"
-		}
+		mavenLocal()
 	}
 }
 
-def applicationModules = ["screen-login","screen-listing"]
+def applicationModules = ["screen-login", "screen-listing", "screen-game"]
 def androidLibs = []
 def javaLibs = []
 

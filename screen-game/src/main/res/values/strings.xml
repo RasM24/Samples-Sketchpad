@@ -1,0 +1,7 @@
+<resources>
+	<string name="app_name">Касатки и пингвины</string>
+	<string name="title_menu">Меню</string>
+	<string name="title_game">Игра</string>
+	<string name="button_start">Начать</string>
+	<string name="button_turn">Ход</string>
+</resources>
