@@ -1,0 +1,20 @@
+dependencies {
+	implementation "com.google.android.material:material:${versions.material}"
+	implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+	implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidxViewModel}"
+
+	implementation "ru.endroad:camp:${versions.camp}"
+	implementation "ru.endroad:mvi-core:${versions.mviCore}"
+	implementation "ru.endroad:fragment-navigation:${versions.fragmentNavigation}"
+
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutine}"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutine}"
+
+	implementation "org.koin:koin-core:${versions.koin}"
+	implementation "org.koin:koin-core-ext:${versions.koin}"
+	implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
+
+	testImplementation 'junit:junit:4.13'
+	testImplementation 'androidx.test.ext:junit:1.1.2'
+	testImplementation 'com.nhaarman:mockito-kotlin-kt1.1:1.6.0'
+}
