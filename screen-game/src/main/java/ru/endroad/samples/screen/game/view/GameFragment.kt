@@ -15,5 +15,6 @@ class GameFragment : CampFragment() {
 		setToolbarText(getString(R.string.title_game))
 
 		end_turn.setOnClickListener { viewModel.endTurn() }
+		viewModel.field.observe(this, board_view::changeData)
 	}
 }

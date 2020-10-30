@@ -5,6 +5,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.endroad.samples.screen.game.router.di.moduleNavigation
 import ru.endroad.samples.screen.game.shared.configuration.moduleConfigurationWorld
+import ru.endroad.samples.screen.game.shared.generation.moduleGenerationWorld
 import ru.endroad.samples.screen.game.view.moduleViewModels
 
 class App : Application() {
@@ -18,7 +19,9 @@ class App : Application() {
 				moduleViewModels,
 				moduleNavigation,
 				moduleConfigurationWorld,
+				moduleGenerationWorld,
 			)
 		}
 	}
+
 }
