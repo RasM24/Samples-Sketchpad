@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.main_navigation_fragment.*
+import org.koin.android.ext.android.inject
 import ru.endroad.libraries.camp.fragment.CampAppBarFragment
 import ru.endroad.sample.screen.navigation.R
 import ru.endroad.sample.screen.navigation.utils.withArguments
@@ -24,6 +25,8 @@ class MainNavigationFragment : CampAppBarFragment(), BottomNavigationView.OnNavi
 
 	override val layout = R.layout.main_navigation_fragment
 
+	private val router: MainNavigationRouter by inject()
+
 	private val initialScreen: Int
 		get() = requireArguments().getInt(INITIAL_SCREEN_KEY)
 
@@ -35,9 +38,9 @@ class MainNavigationFragment : CampAppBarFragment(), BottomNavigationView.OnNavi
 
 	override fun onNavigationItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
-			R.id.navigation_alphabet -> Unit
-			R.id.navigation_colored -> Unit
-			R.id.navigation_external -> Unit
+			R.id.navigation_alphabet -> router.openAlphabetScreen()
+			R.id.navigation_colored -> router.openColoredScreen()
+			R.id.navigation_external -> router.openExternalLinksScreen()
 			else                     -> return false
 		}
 

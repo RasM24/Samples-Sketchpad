@@ -4,4 +4,6 @@
 	<string name="title_alphabet">Alphabet</string>
 	<string name="title_colored">Colored</string>
 	<string name="title_external">External</string>
+
+	<string name="alphabet_stub_text">Оставлено место для возможных примеров</string>
 </resources>
