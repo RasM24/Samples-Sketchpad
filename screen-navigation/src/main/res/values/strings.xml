@@ -1,0 +1,7 @@
+<resources>
+	<string name="app_name">screen-navigation</string>
+
+	<string name="title_alphabet">Alphabet</string>
+	<string name="title_colored">Colored</string>
+	<string name="title_external">External</string>
+</resources>
