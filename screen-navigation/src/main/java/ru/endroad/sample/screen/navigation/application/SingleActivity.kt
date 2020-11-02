@@ -12,6 +12,7 @@ class SingleActivity : CampActivity() {
 	override val theme = R.style.ThemeSketchpad
 
 	private val navigatorHolder: NavigatorHolder by inject()
+	private val router: HubRouter by inject()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		navigatorHolder.hubActivity = this
@@ -21,5 +22,9 @@ class SingleActivity : CampActivity() {
 	override fun onDestroy() {
 		navigatorHolder.hubActivity = null
 		super.onDestroy()
+	}
+
+	override fun onFirstCreate() {
+		router.openMainScreen()
 	}
 }
