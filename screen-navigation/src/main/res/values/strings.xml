@@ -6,4 +6,7 @@
 	<string name="title_external">External</string>
 
 	<string name="alphabet_stub_text">Оставлено место для возможных примеров</string>
+
+	<string name="colored_replace_button">Заменить следующим фрагментом</string>
+	<string name="colored_open_button">Открыть следующий фрагмент</string>
 </resources>

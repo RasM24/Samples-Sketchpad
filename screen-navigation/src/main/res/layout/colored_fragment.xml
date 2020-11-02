@@ -12,4 +12,18 @@
 		android:layout_gravity="center"
 		android:layout_weight="1" />
 
+	<Button
+		android:id="@+id/replace_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="@string/colored_replace_button" />
+
+	<Button
+		android:id="@+id/open_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="@string/colored_open_button" />
+
 </LinearLayout>
