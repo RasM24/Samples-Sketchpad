@@ -1,0 +1,10 @@
+dependencies {
+	implementation "com.google.android.material:material:${versions.material}"
+	implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidxViewModel}"
+
+	implementation "ru.endroad:camp:${versions.camp}"
+
+	implementation "org.koin:koin-core:${versions.koin}"
+	implementation "org.koin:koin-core-ext:${versions.koin}"
+	implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
+}

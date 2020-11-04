@@ -19,7 +19,7 @@ allprojects {
 	}
 }
 
-def applicationModules = ["screen-login", "screen-listing", "screen-game"]
+def applicationModules = ["screen-login", "screen-listing", "screen-game", "screen-navigation"]
 def androidLibs = []
 def javaLibs = []
 
