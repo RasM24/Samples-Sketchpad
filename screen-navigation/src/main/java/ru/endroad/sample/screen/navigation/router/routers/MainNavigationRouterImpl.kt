@@ -3,7 +3,7 @@ package ru.endroad.sample.screen.navigation.router.routers
 import org.koin.java.KoinJavaComponent.inject
 import ru.endroad.sample.screen.navigation.feature.alphabet.AlphabetDestination
 import ru.endroad.sample.screen.navigation.feature.colored.colored.ColoredDestination
-import ru.endroad.sample.screen.navigation.feature.external.ExternalLinksDestination
+import ru.endroad.sample.screen.navigation.feature.external.fragment.ExternalLinksDestination
 import ru.endroad.sample.screen.navigation.feature.navigation.MainNavigationRouter
 import ru.endroad.sample.screen.navigation.router.di.contentNavigatorQualifier
 import ru.endroad.sample.screen.navigation.router.navigator.Navigator
