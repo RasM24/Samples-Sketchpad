@@ -20,5 +20,6 @@ class ExternalLinksFragment : CampFragment() {
 		network_setting_destination_button.setOnClickListener { router.openNetworkSetting() }
 		app_setting_destination_button.setOnClickListener { router.openApplicationSetting() }
 		application_market_destination_button.setOnClickListener { router.openApplicationInMarket("endroad.nitiway") }
+		dialog_destination_button.setOnClickListener { router.openDialogFragment("Hello World!", "Нажмите ок, чтобы закрыть диалог") }
 	}
 }

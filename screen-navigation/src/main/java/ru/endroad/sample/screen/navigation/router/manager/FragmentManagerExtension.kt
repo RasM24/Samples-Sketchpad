@@ -1,9 +1,7 @@
 package ru.endroad.sample.screen.navigation.router.manager
 
 import androidx.annotation.IdRes
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.*
 
 private val Fragment.key: String? get() = this::class.simpleName
 
@@ -37,6 +35,10 @@ fun FragmentManager.forwardTo(fragment: Fragment, animation: FragmentAnimation, 
 		addToBackStack(fragment.key)
 		commitAllowingStateLoss()
 	}
+}
+
+fun FragmentManager.showNowDialog(fragment: DialogFragment) {
+	fragment.show(this, fragment.key)
 }
 
 private fun FragmentTransaction.setAnimationTransaction(animation: FragmentAnimation) {

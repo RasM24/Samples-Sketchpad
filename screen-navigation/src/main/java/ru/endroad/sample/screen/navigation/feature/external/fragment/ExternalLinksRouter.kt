@@ -7,4 +7,5 @@ interface ExternalLinksRouter {
 	fun openNetworkSetting()
 	fun openApplicationSetting()
 	fun openApplicationInMarket(packageName: String)
+	fun openDialogFragment(title: String, message: String)
 }

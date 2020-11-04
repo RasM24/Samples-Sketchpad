@@ -3,6 +3,7 @@ package ru.endroad.sample.screen.navigation.router.routers
 import org.koin.java.KoinJavaComponent.inject
 import ru.endroad.sample.screen.navigation.feature.external.fragment.ExternalLinksRouter
 import ru.endroad.sample.screen.navigation.feature.external.destination.*
+import ru.endroad.sample.screen.navigation.feature.external.dialog.DialogDestination
 import ru.endroad.sample.screen.navigation.router.di.rootNavigatorQualifier
 import ru.endroad.sample.screen.navigation.router.navigator.Navigator
 
@@ -28,5 +29,9 @@ class ExternalLinksRouterImpl : ExternalLinksRouter {
 
 	override fun openApplicationInMarket(packageName: String) {
 		rootNavigator.open(ApplicationMarketDestination(packageName))
+	}
+
+	override fun openDialogFragment(title: String, message: String) {
+		rootNavigator.open(DialogDestination(title, message))
 	}
 }

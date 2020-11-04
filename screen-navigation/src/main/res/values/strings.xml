@@ -10,9 +10,11 @@
 	<string name="colored_replace_button">Заменить следующим фрагментом</string>
 	<string name="colored_open_button">Открыть следующий фрагмент</string>
 
+	<string name="ok_dialog_button">OK</string>
 	<string name="action_send_destination">Расшарить текст: Hello World!</string>
 	<string name="phone_destination_button">Позвонить по телефону: 89291234567</string>
 	<string name="network_setting_destination_button">Открыть настройки сети</string>
 	<string name="app_setting_destination_button">Открыть настройки приложения</string>
 	<string name="application_market_destination_button">Открыть приложение \"Нити Красноярска\" в маркете</string>
+	<string name="dialog_destination_button">Открыть диалог</string>
 </resources>

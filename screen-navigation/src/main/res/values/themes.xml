@@ -17,4 +17,9 @@
 	<style name="ThemeSketchpad.SplashTheme">
 		<item name="android:windowBackground">@drawable/background_splash</item>
 	</style>
+
+	<style name="FullScreenDialog" parent="Theme.AppCompat.Light.DialogWhenLarge">
+		<item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>
+		<item name="windowNoTitle">true</item>
+	</style>
 </resources>
