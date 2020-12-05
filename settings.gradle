@@ -1,3 +1,4 @@
+include ':screen-coroutines'
 rootProject.name = 'Samples-Sketchpad'
 include ':screen-game'
 include ':screen-login'
