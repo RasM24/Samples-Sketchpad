@@ -1,27 +1,32 @@
 package ru.endroad.sample.screen.navigation.application
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import ru.endroad.libraries.camp.activity.CampActivity
 import ru.endroad.sample.screen.navigation.R
-import ru.endroad.sample.screen.navigation.router.navigator.NavigatorHolder
+import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandExecutor
+import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandStack
 
+@InternalCoroutinesApi
 class SingleActivity : CampActivity() {
 
 	override val layout = R.layout.root_activity
 	override val theme = R.style.ThemeSketchpad
 
-	private val navigatorHolder: NavigatorHolder by inject()
+	private val navigator: NavigationCommandStack by inject()
+
 	private val router: HubRouter by inject()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
-		navigatorHolder.hubActivity = this
 		super.onCreate(savedInstanceState)
-	}
-
-	override fun onDestroy() {
-		navigatorHolder.hubActivity = null
-		super.onDestroy()
+		lifecycleScope.launchWhenResumed {
+			navigator.commandFlow.collect { requireActivity ->
+				requireActivity(this@SingleActivity)
+			}
+		}
 	}
 
 	override fun onFirstCreate() {

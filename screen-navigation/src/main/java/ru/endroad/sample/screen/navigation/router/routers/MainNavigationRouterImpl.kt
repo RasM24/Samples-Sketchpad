@@ -5,6 +5,7 @@ import ru.endroad.sample.screen.navigation.feature.alphabet.AlphabetDestination
 import ru.endroad.sample.screen.navigation.feature.colored.colored.ColoredDestination
 import ru.endroad.sample.screen.navigation.feature.external.fragment.ExternalLinksDestination
 import ru.endroad.sample.screen.navigation.feature.navigation.MainNavigationRouter
+import ru.endroad.sample.screen.navigation.router.command.Command
 import ru.endroad.sample.screen.navigation.router.di.contentNavigatorQualifier
 import ru.endroad.sample.screen.navigation.router.navigator.Navigator
 
@@ -13,14 +14,14 @@ class MainNavigationRouterImpl : MainNavigationRouter {
 	private val contentNavigator: Navigator by inject(Navigator::class.java, contentNavigatorQualifier)
 
 	override fun openColoredScreen() {
-		contentNavigator.changeRoot(ColoredDestination)
+		contentNavigator.execute(Command.ChangeRoot(ColoredDestination))
 	}
 
 	override fun openAlphabetScreen() {
-		contentNavigator.changeRoot(AlphabetDestination)
+		contentNavigator.execute(Command.ChangeRoot(AlphabetDestination))
 	}
 
 	override fun openExternalLinksScreen() {
-		contentNavigator.changeRoot(ExternalLinksDestination)
+		contentNavigator.execute(Command.ChangeRoot(ExternalLinksDestination))
 	}
 }
