@@ -12,5 +12,8 @@
 	<string name="flow_simple_start_button">Запустить пример Flow</string>
 	<string name="flow_with_exception_start_button">Запустить пример Flow + Exception</string>
 
+	<string name="flow_shared_start_button">Запустить пример Shared Flow</string>
+	<string name="flow_state_start_button">Запустить пример State Flow</string>
+
 	<string name="clear_log_id">Очистить лог</string>
 </resources>
