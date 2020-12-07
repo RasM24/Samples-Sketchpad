@@ -2,4 +2,15 @@
 	<string name="app_coroutines_name">Coroutines Screen Sample</string>
 	<string name="tab_simple_coroutines">Простые корутины</string>
 	<string name="tab_flow_coroutines">Shared/State Flow</string>
+
+	<string name="coroutines_simple_samples_title">Простые примеры с coroutines</string>
+	<string name="coroutine_start_successful_button">Запустить корутину с успехом</string>
+	<string name="coroutine_start_with_exception_button">Запустить корутину с ошибкой</string>
+	<string name="coroutine_start_async_function_button">Запустить корутину с async</string>
+
+	<string name="coroutines_flow_samples_title">Примеры с Flow coroutines</string>
+	<string name="flow_simple_start_button">Запустить пример Flow</string>
+	<string name="flow_with_exception_start_button">Запустить пример Flow + Exception</string>
+
+	<string name="clear_log_id">Очистить лог</string>
 </resources>

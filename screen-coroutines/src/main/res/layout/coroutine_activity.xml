@@ -10,6 +10,62 @@
 		android:orientation="vertical"
 		android:padding="24dp">
 
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/coroutines_simple_samples_title"
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+		<Button
+			android:id="@+id/button_start_successful_coroutine"
+			style="@style/ButtonStyle"
+			android:text="@string/coroutine_start_successful_button" />
+
+		<Button
+			android:id="@+id/button_start_coroutine_with_exception"
+			style="@style/ButtonStyle"
+			android:text="@string/coroutine_start_with_exception_button" />
+
+		<Button
+			android:id="@+id/button_start_async_function"
+			style="@style/ButtonStyle"
+			android:text="@string/coroutine_start_async_function_button" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="@string/coroutines_flow_samples_title"
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+		<Button
+			android:id="@+id/start_flow_button"
+			style="@style/ButtonStyle"
+			android:text="@string/flow_simple_start_button" />
+
+		<Button
+			android:id="@+id/start_flow_with_exception_button"
+			style="@style/ButtonStyle"
+			android:text="@string/flow_with_exception_start_button" />
+
+		<Button
+			android:id="@+id/button_clear_log"
+			style="@style/Widget.MaterialComponents.Button.TextButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="@string/clear_log_id"
+			android:textColor="?colorSecondary" />
+
+		<TextView
+			android:id="@+id/log_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="bottom"
+			android:maxLines="30"
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+			android:textSize="16sp"
+			android:textStyle="bold" />
 
 	</LinearLayout>
 </ScrollView>

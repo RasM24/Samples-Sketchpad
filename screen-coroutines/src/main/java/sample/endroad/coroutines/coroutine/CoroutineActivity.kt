@@ -18,7 +18,18 @@ class CoroutineActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.coroutine_activity)
 
-		subscribeMessages { }
+		setupViewComponent()
+		subscribeMessages { message -> log_view.appendText(message) }
+	}
+
+	private fun setupViewComponent() {
+		button_start_successful_coroutine.setOnClickListener { coroutineViewModel.exampleSuspendFunction() }
+		button_start_coroutine_with_exception.setOnClickListener { coroutineViewModel.exampleFailureHandler() }
+		button_start_async_function.setOnClickListener { coroutineViewModel.exampleAsyncFunction() }
+		start_flow_button.setOnClickListener { coroutineViewModel.exampleFlowFromElements() }
+		start_flow_with_exception_button.setOnClickListener { coroutineViewModel.exampleFlowWithException() }
+
+		button_clear_log.setOnClickListener { log_view.text = null }
 	}
 
 	private fun subscribeMessages(messageListener: (String) -> Unit) {
