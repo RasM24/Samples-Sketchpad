@@ -5,4 +5,14 @@
 	android:orientation="vertical"
 	android:padding="24dp">
 
+	<Button
+		android:id="@+id/open_simple_samples"
+		style="@style/ButtonStyle"
+		android:text="@string/tab_simple_coroutines" />
+
+	<Button
+		android:id="@+id/open_flow_samples"
+		style="@style/ButtonStyle"
+		android:text="@string/tab_flow_coroutines" />
+
 </LinearLayout>

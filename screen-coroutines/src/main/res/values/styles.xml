@@ -4,9 +4,16 @@
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+		<item name="buttonStyle">@style/ButtonStyle</item>
 	</style>
 
 	<style name="ThemeSketchpad.SplashTheme">
 		<item name="android:windowBackground">@drawable/background_splash</item>
+	</style>
+
+	<style name="ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginTop">8dp</item>
 	</style>
 </resources>

@@ -19,5 +19,13 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity
+			android:name=".coroutine.CoroutineActivity"
+			android:label="@string/app_coroutines_name"
+			android:theme="@style/ThemeSketchpad" />
+		<activity
+			android:name=".flow.FlowActivity"
+			android:label="@string/app_coroutines_name"
+			android:theme="@style/ThemeSketchpad" />
 	</application>
 </manifest>

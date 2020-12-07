@@ -1,3 +1,5 @@
 <resources>
 	<string name="app_coroutines_name">Coroutines Screen Sample</string>
+	<string name="tab_simple_coroutines">Простые корутины</string>
+	<string name="tab_flow_coroutines">Shared/State Flow</string>
 </resources>
