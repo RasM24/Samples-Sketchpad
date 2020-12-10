@@ -10,5 +10,5 @@ val viewModelModule = module {
 
 	viewModel { CoroutineViewModel() }
 	viewModel { FlowViewModel() }
-	viewModel { RealityViewModel() }
+	viewModel { RealityViewModel(get(), get()) }
 }
