@@ -1,5 +1,8 @@
 buildscript {
 	apply from: 'dependencies.gradle'
+	ext {
+		versions.kotlin = '1.4.20'
+	}
 
 	repositories {
 		google()
@@ -19,7 +22,7 @@ allprojects {
 	}
 }
 
-def applicationModules = ["screen-login", "screen-listing", "screen-game", "screen-navigation"]
+def applicationModules = ["screen-login", "screen-listing", "screen-game", "screen-navigation","screen-coroutines"]
 def androidLibs = []
 def javaLibs = []
 
