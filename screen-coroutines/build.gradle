@@ -12,6 +12,10 @@ dependencies {
 	implementation "org.koin:koin-core-ext:${versions.koin}"
 	implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 
+	implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+	implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+	implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
 	testImplementation 'junit:junit:4.13.1'
 	testImplementation 'androidx.test.ext:junit:1.1.2'
 	testImplementation 'com.nhaarman:mockito-kotlin-kt1.1:1.6.0'

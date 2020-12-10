@@ -16,4 +16,7 @@
 	<string name="flow_state_start_button">Запустить пример State Flow</string>
 
 	<string name="clear_log_id">Очистить лог</string>
+	<string name="tab_reality_coroutines">Приближенное к реальности</string>
+	<string name="coroutine_reality_repositories_button">Список репозиториев</string>
+	<string name="coroutine_reality_private_button">Приватный запрос</string>
 </resources>

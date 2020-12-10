@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="24dp">
+
+		<Button
+			android:id="@+id/fetch_repositories_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/coroutine_reality_repositories_button" />
+
+		<Button
+			android:id="@+id/send_private_request"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/coroutine_reality_private_button" />
+
+		<Button
+			android:id="@+id/button_clear_log"
+			style="@style/Widget.MaterialComponents.Button.TextButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="@string/clear_log_id"
+			android:textColor="?colorSecondary" />
+
+		<TextView
+			android:id="@+id/log_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="bottom"
+			android:maxLines="30"
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+			android:textSize="16sp"
+			android:textStyle="bold" />
+
+	</LinearLayout>
+</ScrollView>

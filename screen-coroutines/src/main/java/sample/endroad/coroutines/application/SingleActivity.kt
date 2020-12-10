@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.hub_activity.*
 import sample.endroad.coroutines.R
 import sample.endroad.coroutines.coroutine.CoroutineActivity
 import sample.endroad.coroutines.flow.FlowActivity
+import sample.endroad.coroutines.reality.RealityActivity
 import kotlin.reflect.KClass
 
 class SingleActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class SingleActivity : AppCompatActivity() {
 
 		open_simple_samples.setOnClickListener { startScreen(CoroutineActivity::class) }
 		open_flow_samples.setOnClickListener { startScreen(FlowActivity::class) }
+		open_reality_sample.setOnClickListener { startScreen(RealityActivity::class) }
 	}
 
 	private fun startScreen(kClass: KClass<out Activity>) {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="sample.endroad.coroutines">
 
+	<uses-permission android:name="android.permission.INTERNET" />
+	
 	<application
 		android:name=".application.App"
 		android:allowBackup="true"
@@ -25,6 +27,10 @@
 			android:theme="@style/ThemeSketchpad" />
 		<activity
 			android:name=".flow.FlowActivity"
+			android:label="@string/app_coroutines_name"
+			android:theme="@style/ThemeSketchpad" />
+		<activity
+			android:name=".reality.RealityActivity"
 			android:label="@string/app_coroutines_name"
 			android:theme="@style/ThemeSketchpad" />
 	</application>

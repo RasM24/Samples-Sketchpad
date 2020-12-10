@@ -15,4 +15,9 @@
 		style="@style/ButtonStyle"
 		android:text="@string/tab_flow_coroutines" />
 
+	<Button
+		android:id="@+id/open_reality_sample"
+		style="@style/ButtonStyle"
+		android:text="@string/tab_reality_coroutines" />
+
 </LinearLayout>
