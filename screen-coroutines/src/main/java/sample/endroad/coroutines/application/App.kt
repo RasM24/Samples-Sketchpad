@@ -3,6 +3,7 @@ package sample.endroad.coroutines.application
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import sample.endroad.coroutines.reality.data.githubDataModule
 
 class App : Application() {
 
@@ -10,7 +11,7 @@ class App : Application() {
 		super.onCreate()
 		startKoin {
 			androidContext(this@App)
-			modules(viewModelModule)
+			modules(viewModelModule, githubDataModule)
 		}
 	}
 }
