@@ -27,5 +27,9 @@
 			android:name=".flow.FlowActivity"
 			android:label="@string/app_coroutines_name"
 			android:theme="@style/ThemeSketchpad" />
+		<activity
+			android:name=".reality.RealityActivity"
+			android:label="@string/app_coroutines_name"
+			android:theme="@style/ThemeSketchpad" />
 	</application>
 </manifest>
