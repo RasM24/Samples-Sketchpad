@@ -5,7 +5,7 @@ import kotlinx.android.synthetic.main.fragment_auth.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.endroad.libraries.camp.extension.hideViews
 import ru.endroad.libraries.camp.extension.showViews
-import ru.endroad.libraries.camp.fragment.CampFragment
+import ru.endroad.component.core.CampFragment
 import ru.endroad.libraries.mvi.core.view.MviView
 
 class LoginFragment : CampFragment(), MviView<LoginScreenState, LoginScreenEvent> {

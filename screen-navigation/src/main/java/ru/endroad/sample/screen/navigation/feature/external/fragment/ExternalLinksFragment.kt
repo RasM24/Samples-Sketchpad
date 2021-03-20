@@ -2,7 +2,7 @@ package ru.endroad.sample.screen.navigation.feature.external.fragment
 
 import kotlinx.android.synthetic.main.external_links_fragment.*
 import org.koin.android.ext.android.inject
-import ru.endroad.libraries.camp.fragment.CampFragment
+import ru.endroad.component.core.CampFragment
 import ru.endroad.sample.screen.navigation.R
 import ru.endroad.sample.screen.navigation.feature.external.fragment.ExternalLinksRouter
 
