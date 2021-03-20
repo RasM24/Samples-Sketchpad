@@ -3,7 +3,7 @@ package ru.endroad.samples.login.router.navigator
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import ru.endroad.navigation.*
+import ru.endroad.component.core.*
 import ru.endroad.samples.login.error.DomainError
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
