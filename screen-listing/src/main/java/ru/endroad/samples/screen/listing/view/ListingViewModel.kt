@@ -1,11 +1,11 @@
 package ru.endroad.samples.screen.listing.view
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import ru.endroad.libraries.mvi.core.viewmodel.PresenterMvi
+import ru.endroad.component.core.MviViewModel
 import ru.endroad.samples.screen.listing.shared.listing.MakeItemListUseCase
 import ru.endroad.samples.screen.listing.shared.movies.GetMoviesUseCase
 import ru.endroad.samples.screen.listing.shared.promo.GetPromoUseCase
@@ -16,15 +16,15 @@ class ListingViewModel(
 	private val getMovies: GetMoviesUseCase,
 	private val getSeriesList: GetSeriesListUseCase,
 	private val getPromo: GetPromoUseCase
-) : PresenterMvi<ListingScreenState, ListingScreenEvent>, ViewModel() {
+) : MviViewModel<ListingScreenState, ListingScreenEvent>, ViewModel() {
 
-	override val state = MutableLiveData<ListingScreenState>()
+	override val state = MutableStateFlow<ListingScreenState>(ListingScreenState.Initialized)
 
 	init {
-		reduce(ListingScreenEvent.FetchData())
+		notice(ListingScreenEvent.FetchData)
 	}
 
-	override fun reduce(event: ListingScreenEvent) {
+	override fun notice(event: ListingScreenEvent) {
 		viewModelScope.launch {
 			when (event) {
 				is ListingScreenEvent.FetchData -> state.value = event.reduce()

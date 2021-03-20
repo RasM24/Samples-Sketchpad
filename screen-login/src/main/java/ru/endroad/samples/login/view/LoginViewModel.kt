@@ -1,12 +1,12 @@
 package ru.endroad.samples.login.view
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import ru.endroad.libraries.mvi.core.viewmodel.PresenterMvi
+import ru.endroad.component.core.MviViewModel
 import ru.endroad.samples.login.domain.PhoneValidator
 import ru.endroad.samples.login.error.DomainError
 import ru.endroad.samples.login.router.routers.LoginRouter
@@ -29,13 +29,11 @@ class LoginViewModel(
 	private val phoneValidator: PhoneValidator,
 	private val verificationCodeValidator: VerificationCodeValidator,
 	private val router: LoginRouter
-) : PresenterMvi<LoginScreenState, LoginScreenEvent>, ViewModel() {
+) : MviViewModel<LoginScreenState, LoginScreenEvent>, ViewModel() {
 
-	override val state = MutableLiveData<LoginScreenState>().apply {
-		value = LoginScreenState.Initialized(false)
-	}
+	override val state = MutableStateFlow<LoginScreenState>(LoginScreenState.Initialized(false))
 
-	override fun reduce(event: LoginScreenEvent) {
+	override fun notice(event: LoginScreenEvent) {
 		viewModelScope.launch(exceptionHandler) {
 			when (event) {
 				LoginScreenEvent.ClickFacebookSign    -> successLogin(signWithFacebook().token)
@@ -80,7 +78,7 @@ class LoginViewModel(
 		router.openMainScreen()
 	}
 
-	val exceptionHandler = CoroutineExceptionHandler { _, exception ->
+	private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
 		when (exception) {
 			is DomainError.WrongOtp     -> router.openErrorScreen(exception.message ?: "")
 			is DomainError.Unauthorized -> router.openErrorScreen(exception.message ?: "")
