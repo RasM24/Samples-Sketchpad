@@ -2,7 +2,7 @@ package ru.endroad.samples.screen.listing.application
 
 import android.os.Bundle
 import org.koin.android.ext.android.inject
-import ru.endroad.libraries.camp.activity.CampActivity
+import ru.endroad.component.core.CampActivity
 import ru.endroad.samples.screen.listing.R
 import ru.endroad.samples.screen.listing.router.navigator.Navigator
 import ru.endroad.samples.screen.listing.router.routers.MainRouter
