@@ -23,7 +23,7 @@ allprojects {
 }
 
 def applicationModules = ["screen-login", "screen-listing", "screen-game", "screen-navigation","screen-coroutines"]
-def androidLibs = []
+def androidLibs = ["component-core"]
 def javaLibs = []
 
 def getProjectsBy(List<String> libraries) {

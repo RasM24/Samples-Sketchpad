@@ -1,4 +1,6 @@
 dependencies {
+	implementation project(":component-core")
+
 	implementation "com.google.android.material:material:${versions.material}"
 	implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidxViewModel}"
 
