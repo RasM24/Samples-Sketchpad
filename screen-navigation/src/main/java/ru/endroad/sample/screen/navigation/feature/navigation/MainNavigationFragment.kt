@@ -7,11 +7,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.main_navigation_fragment.*
 import org.koin.android.ext.android.inject
-import ru.endroad.libraries.camp.fragment.CampAppBarFragment
+import ru.endroad.component.core.CampFragment
 import ru.endroad.sample.screen.navigation.R
 import ru.endroad.sample.screen.navigation.utils.withArguments
 
-class MainNavigationFragment : CampAppBarFragment(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainNavigationFragment : CampFragment(), BottomNavigationView.OnNavigationItemSelectedListener {
 
 	companion object {
 
@@ -60,6 +60,6 @@ class MainNavigationFragment : CampAppBarFragment(), BottomNavigationView.OnNavi
 	}
 
 	private fun ActionBar.setHomeEnabled() {
-		this.setDisplayHomeAsUpEnabled(parentFragmentManager.backStackEntryCount != 0)
+		this.setDisplayHomeAsUpEnabled(requireFragmentManager().backStackEntryCount != 0)
 	}
 }

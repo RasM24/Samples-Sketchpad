@@ -2,26 +2,25 @@ package ru.endroad.samples.screen.listing.view
 
 import kotlinx.android.synthetic.main.fragment_listing.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.endroad.libraries.camp.fragment.CampFragment
-import ru.endroad.libraries.mvi.core.view.MviView
+import ru.endroad.component.core.MviFragment
 import ru.endroad.samples.screen.listing.R
 import ru.endroad.samples.screen.listing.view.adapter.ListingAdapter
 
-class ListingFragment : CampFragment(), MviView<ListingScreenState, ListingScreenEvent> {
+class ListingFragment : MviFragment<ListingScreenState, ListingScreenEvent>() {
 
 	override val layout = R.layout.fragment_listing
 
-	override val presenter by viewModel<ListingViewModel>()
+	override val viewModel by viewModel<ListingViewModel>()
 
 	private val adapter = ListingAdapter()
 
 	override fun setupViewComponents() {
-		bindRenderState(this)
 		list.adapter = adapter
 	}
 
 	override fun render(state: ListingScreenState) {
 		when (state) {
+			ListingScreenState.Initialized   -> Unit
 			is ListingScreenState.DataLoaded -> adapter.items = state.items
 		}
 	}

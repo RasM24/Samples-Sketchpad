@@ -1,15 +1,12 @@
 buildscript {
 	apply from: 'dependencies.gradle'
-	ext {
-		versions.kotlin = '1.4.20'
-	}
 
 	repositories {
 		google()
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:4.1.0'
+		classpath 'com.android.tools.build:gradle:4.1.2'
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 	}
 }
@@ -23,7 +20,7 @@ allprojects {
 }
 
 def applicationModules = ["screen-login", "screen-listing", "screen-game", "screen-navigation","screen-coroutines"]
-def androidLibs = []
+def androidLibs = ["component-core"]
 def javaLibs = []
 
 def getProjectsBy(List<String> libraries) {

@@ -3,10 +3,7 @@ package ru.endroad.samples.screen.listing.router.navigator
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import ru.endroad.navigation.*
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import ru.endroad.component.core.*
 
 interface Navigator {
 	val container: Int

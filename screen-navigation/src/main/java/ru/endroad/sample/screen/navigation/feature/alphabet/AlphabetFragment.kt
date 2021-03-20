@@ -1,6 +1,6 @@
 package ru.endroad.sample.screen.navigation.feature.alphabet
 
-import ru.endroad.libraries.camp.fragment.CampFragment
+import ru.endroad.component.core.CampFragment
 import ru.endroad.sample.screen.navigation.R
 
 class AlphabetFragment : CampFragment() {

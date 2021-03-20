@@ -2,7 +2,7 @@ package ru.endroad.samples.login.application
 
 import kotlinx.android.synthetic.main.stub_fragment.*
 import org.koin.android.ext.android.inject
-import ru.endroad.libraries.camp.fragment.CampFragment
+import ru.endroad.component.core.CampFragment
 import ru.endroad.samples.login.R
 import ru.endroad.samples.login.router.routers.LoginRouter
 import ru.endroad.samples.login.shared.session.LogoutUseCase

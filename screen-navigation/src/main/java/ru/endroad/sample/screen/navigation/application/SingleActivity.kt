@@ -5,9 +5,8 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
-import ru.endroad.libraries.camp.activity.CampActivity
+import ru.endroad.component.core.CampActivity
 import ru.endroad.sample.screen.navigation.R
-import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandExecutor
 import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandStack
 
 @InternalCoroutinesApi
