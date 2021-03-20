@@ -9,8 +9,6 @@ dependencies {
 	implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
 //	implementaiton "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
-	implementation "ru.endroad:camp:${versions.camp}"
-
 	implementation "org.koin:koin-core:${versions.koin}"
 	implementation "org.koin:koin-core-ext:${versions.koin}"
 	implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
