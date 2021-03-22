@@ -7,12 +7,10 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import ru.endroad.component.core.MviViewModel
-import ru.endroad.samples.login.domain.PhoneValidator
 import ru.endroad.samples.login.error.DomainError
 import ru.endroad.samples.login.router.routers.LoginRouter
 import ru.endroad.samples.login.shared.otp.CheckOtpCodeUseCase
 import ru.endroad.samples.login.shared.otp.SendOtpCodeUseCase
-import ru.endroad.samples.login.shared.otp.VerificationCodeValidator
 import ru.endroad.samples.login.shared.session.CreateSessionUseCase
 import ru.endroad.samples.login.shared.session.Session
 import ru.endroad.samples.login.shared.social.SignWithFacebookUseCase
@@ -26,51 +24,36 @@ class LoginViewModel(
 	private val signWithFacebook: SignWithFacebookUseCase,
 	private val signWithGoogle: SignWithGoogleUseCase,
 	private val signWithVkontakte: SignWithVkontakteUseCase,
-	private val phoneValidator: PhoneValidator,
-	private val verificationCodeValidator: VerificationCodeValidator,
 	private val router: LoginRouter
 ) : MviViewModel<LoginScreenState, LoginScreenEvent>, ViewModel() {
 
-	override val state = MutableStateFlow<LoginScreenState>(LoginScreenState.Initialized(false))
+	override val state = MutableStateFlow<LoginScreenState>(LoginScreenState.Initialized(""))
 
 	override fun notice(event: LoginScreenEvent) {
 		viewModelScope.launch(exceptionHandler) {
 			when (event) {
-				LoginScreenEvent.ClickFacebookSign    -> successLogin(signWithFacebook().token)
-				LoginScreenEvent.ClickGoogleSign      -> successLogin(signWithGoogle().token)
-				LoginScreenEvent.ClickVkontakteSign   -> successLogin(signWithVkontakte().token)
-				is LoginScreenEvent.ClickSendOtpCode  -> state.value = event.reduce()
-				is LoginScreenEvent.ClickCheckOtpCode -> event.reduce()
-				is LoginScreenEvent.ClickResendCode   -> state.value = event.reduce()
-				is LoginScreenEvent.ChangeCode        -> state.value = event.reduce()
-				is LoginScreenEvent.ChangePhone       -> state.value = event.reduce()
+				LoginScreenEvent.ClickFacebookSign  -> successLogin(signWithFacebook().token)
+				LoginScreenEvent.ClickGoogleSign    -> successLogin(signWithGoogle().token)
+				LoginScreenEvent.ClickVkontakteSign -> successLogin(signWithVkontakte().token)
+				LoginScreenEvent.ClickCheckOtpCode  -> checkOtpCode((state.value as LoginScreenState.VerifyCode).code).token.let(::successLogin)
+				LoginScreenEvent.ClickSendOtpCode   -> sendCode(state.value.phone).let(state::tryEmit)
+				LoginScreenEvent.ClickResendCode    -> sendCode(state.value.phone).let(state::tryEmit)
+				else                                -> reduce(state.value, event).let(state::tryEmit)
 			}
 		}
 	}
 
-	private fun LoginScreenEvent.ChangeCode.reduce(): LoginScreenState {
-		val codeValidate = verificationCodeValidator.validate(code)
-		return LoginScreenState.VerifyCode(isCodeValidate = codeValidate)
+	private val reduce: (LoginScreenState, LoginScreenEvent) -> LoginScreenState = { currentState, event ->
+		when (event) {
+			is LoginScreenEvent.ChangeCode -> (currentState as LoginScreenState.VerifyCode).copy(code = event.code)
+			is LoginScreenEvent.ChangePhone -> LoginScreenState.Initialized(phone = event.phone)
+			else -> throw IllegalStateException()
+		}
 	}
 
-	private fun LoginScreenEvent.ChangePhone.reduce(): LoginScreenState {
-		val phoneValidate = phoneValidator.validate(phone)
-		return LoginScreenState.Initialized(isPhoneValidate = phoneValidate)
-	}
-
-	private suspend fun LoginScreenEvent.ClickSendOtpCode.reduce(): LoginScreenState {
+	private suspend fun sendCode(phone: String): LoginScreenState {
 		sendOtpCode(phone)
-		return LoginScreenState.VerifyCode(isCodeValidate = false)
-	}
-
-	private suspend fun LoginScreenEvent.ClickCheckOtpCode.reduce() {
-		val credential = checkOtpCode(code)
-		successLogin(credential.token)
-	}
-
-	private suspend fun LoginScreenEvent.ClickResendCode.reduce(): LoginScreenState {
-		sendOtpCode(phone)
-		return LoginScreenState.VerifyCode(isCodeValidate = false)
+		return LoginScreenState.VerifyCode(phone, "")
 	}
 
 	private fun successLogin(token: String) {
