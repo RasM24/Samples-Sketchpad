@@ -37,7 +37,16 @@ class LoginComposeFragment : Fragment() {
 						onVkSignClick = { viewModel.notice(LoginScreenEvent.ClickVkontakteSign) },
 						onGoogleSignClick = { viewModel.notice(LoginScreenEvent.ClickGoogleSign) },
 					)
-					is LoginScreenState.VerifyCode  -> RenderStubView()
+					is LoginScreenState.VerifyCode -> VerifyCodeStateScreen(
+						state = state,
+						changePhone = { viewModel.notice(LoginScreenEvent.ChangePhone(it)) },
+						changeCode = { viewModel.notice(LoginScreenEvent.ChangeCode(it)) },
+						checkOtpCode = { viewModel.notice(LoginScreenEvent.ClickCheckOtpCode) },
+						resendOtpCode = { viewModel.notice(LoginScreenEvent.ClickResendCode) },
+						onFbSignClick = { viewModel.notice(LoginScreenEvent.ClickFacebookSign) },
+						onVkSignClick = { viewModel.notice(LoginScreenEvent.ClickVkontakteSign) },
+						onGoogleSignClick = { viewModel.notice(LoginScreenEvent.ClickGoogleSign) },
+					)
 				}
 			}
 		}
