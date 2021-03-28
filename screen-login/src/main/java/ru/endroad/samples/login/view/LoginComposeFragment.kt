@@ -29,7 +29,14 @@ class LoginComposeFragment : Fragment() {
 		MaterialTheme {
 			Scaffold {
 				when (val state = stateFlow.collectAsState().value) {
-					is LoginScreenState.Initialized -> RenderStubView()
+					is LoginScreenState.Initialized -> InitializedStateScreen(
+						state,
+						onChangeText = { viewModel.notice(LoginScreenEvent.ChangePhone(it)) },
+						onSendOtpCode = { viewModel.notice(LoginScreenEvent.ClickSendOtpCode) },
+						onFbSignClick = { viewModel.notice(LoginScreenEvent.ClickFacebookSign) },
+						onVkSignClick = { viewModel.notice(LoginScreenEvent.ClickVkontakteSign) },
+						onGoogleSignClick = { viewModel.notice(LoginScreenEvent.ClickGoogleSign) },
+					)
 					is LoginScreenState.VerifyCode  -> RenderStubView()
 				}
 			}
