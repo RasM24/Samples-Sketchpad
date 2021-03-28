@@ -1,6 +1,8 @@
 package ru.endroad.samples.login.view
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +42,7 @@ fun VerifyCodeStateScreen(
 	Column(
 		modifier = Modifier
 			.fillMaxWidth()
+			.verticalScroll(state = ScrollState(0), enabled = true)
 			.padding(vertical = 16.dp),
 	) {
 		val centerModifier = Modifier
