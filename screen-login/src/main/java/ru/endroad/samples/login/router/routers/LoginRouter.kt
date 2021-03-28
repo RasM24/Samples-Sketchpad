@@ -2,12 +2,12 @@ package ru.endroad.samples.login.router.routers
 
 import ru.endroad.samples.login.application.StubFragment
 import ru.endroad.samples.login.router.navigator.Navigator
-import ru.endroad.samples.login.view.LoginFragment
+import ru.endroad.samples.login.view.LoginComposeFragment
 
 class LoginRouter(private val navigatorHolder: Navigator) {
 
 	fun openLoginScreen() {
-		navigatorHolder.changeRoot(LoginFragment())
+		navigatorHolder.changeRoot(LoginComposeFragment())
 	}
 
 	fun openMainScreen() {

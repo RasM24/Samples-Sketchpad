@@ -1,21 +1,26 @@
 buildscript {
 	apply from: 'dependencies.gradle'
 
+	ext {
+		compose_version = '1.0.0-beta02'
+	}
+
 	repositories {
 		google()
+		mavenCentral()
 		jcenter()
 	}
 	dependencies {
-		classpath 'com.android.tools.build:gradle:4.1.2'
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+		classpath "com.android.tools.build:gradle:7.0.0-alpha10"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31"
 	}
 }
 
 allprojects {
 	repositories {
 		google()
+		mavenCentral()
 		jcenter()
-		mavenLocal()
 	}
 }
 
