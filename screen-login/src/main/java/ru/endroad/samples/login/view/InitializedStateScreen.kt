@@ -16,32 +16,18 @@ private fun validate(phone: String): Boolean =
 @Preview
 @Composable
 private fun InitStateWithValidatePhonePreview() {
-	InitializedStateScreen(
-		state = LoginScreenState.Initialized("+79293375503"),
-		onChangeText = { /*TODO*/ },
-		onSendOtpCode = { /*TODO*/ },
-		onFbSignClick = { /*TODO*/ },
-		onVkSignClick = { /*TODO*/ },
-		onGoogleSignClick = { /*TODO*/ },
-	)
+	LoginScreenState.Initialized("+79293375503", {}).RenderUI()
 }
 
 @Preview
 @Composable
 private fun InitStateWithInValidatePhonePreview() {
-	InitializedStateScreen(
-		state = LoginScreenState.Initialized("+7929337550"),
-		onChangeText = { /*TODO*/ },
-		onSendOtpCode = { /*TODO*/ },
-		onFbSignClick = { /*TODO*/ },
-		onVkSignClick = { /*TODO*/ },
-		onGoogleSignClick = { /*TODO*/ },
-	)
+	LoginScreenState.Initialized("+7929337550", {}).RenderUI()
 }
 
 @Composable
 fun InitializedStateScreen(
-	state: LoginScreenState.Initialized,
+	phone: String,
 	onChangeText: (String) -> Unit,
 	onSendOtpCode: () -> Unit,
 	onFbSignClick: () -> Unit,
@@ -58,11 +44,11 @@ fun InitializedStateScreen(
 			.align(Alignment.CenterHorizontally)
 			.fillMaxWidth(0.7f)
 
-		PhoneInputField(modifier = centerModifier, phone = state.phone, changePhone = onChangeText)
+		PhoneInputField(modifier = centerModifier, phone = phone, changePhone = onChangeText)
 		Spacer(modifier = Modifier.height(16.dp))
 		LegalText(modifier = centerModifier)
 		Spacer(modifier = Modifier.height(24.dp))
-		SendCodeButton(modifier = centerModifier, sendOtpCodeAction = onSendOtpCode, enabled = validate(state.phone))
+		SendCodeButton(modifier = centerModifier, sendOtpCodeAction = onSendOtpCode, enabled = validate(phone))
 		Divider()
 		SocialNetworkSign(onFbSignClick, onVkSignClick, onGoogleSignClick)
 	}

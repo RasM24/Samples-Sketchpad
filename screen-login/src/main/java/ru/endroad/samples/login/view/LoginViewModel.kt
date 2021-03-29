@@ -27,7 +27,7 @@ class LoginViewModel(
 	private val router: LoginRouter
 ) : MviViewModel<LoginScreenState, LoginScreenEvent>, ViewModel() {
 
-	override val state = MutableStateFlow<LoginScreenState>(LoginScreenState.Initialized(""))
+	override val state = MutableStateFlow<LoginScreenState>(LoginScreenState.Initialized("", ::notice))
 
 	override fun notice(event: LoginScreenEvent) {
 		viewModelScope.launch(exceptionHandler) {
@@ -46,14 +46,14 @@ class LoginViewModel(
 	private val reduce: (LoginScreenState, LoginScreenEvent) -> LoginScreenState = { currentState, event ->
 		when (event) {
 			is LoginScreenEvent.ChangeCode -> (currentState as LoginScreenState.VerifyCode).copy(code = event.code)
-			is LoginScreenEvent.ChangePhone -> LoginScreenState.Initialized(phone = event.phone)
+			is LoginScreenEvent.ChangePhone -> LoginScreenState.Initialized(phone = event.phone, ::notice)
 			else -> throw IllegalStateException()
 		}
 	}
 
 	private suspend fun sendCode(phone: String): LoginScreenState {
 		sendOtpCode(phone)
-		return LoginScreenState.VerifyCode(phone, "")
+		return LoginScreenState.VerifyCode(phone, "", ::notice)
 	}
 
 	private fun successLogin(token: String) {

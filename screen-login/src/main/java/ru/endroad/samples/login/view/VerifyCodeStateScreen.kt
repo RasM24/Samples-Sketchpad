@@ -16,21 +16,13 @@ private fun validate(phone: String): Boolean =
 @Preview
 @Composable
 fun VerifyCodeStatePreview() {
-	VerifyCodeStateScreen(
-		state = LoginScreenState.VerifyCode("+79293375503", code = "345"),
-		changePhone = { /*TODO*/ },
-		changeCode = { /*TODO*/ },
-		checkOtpCode = { /*TODO*/ },
-		resendOtpCode = { /*TODO*/ },
-		onFbSignClick = { /*TODO*/ },
-		onVkSignClick = { /*TODO*/ },
-		onGoogleSignClick = { /*TODO*/ },
-	)
+	LoginScreenState.VerifyCode("+79293375503", code = "345", {}).RenderUI()
 }
 
 @Composable
 fun VerifyCodeStateScreen(
-	state: LoginScreenState.VerifyCode,
+	phone: String,
+	code: String,
 	changePhone: (String) -> Unit,
 	changeCode: (String) -> Unit,
 	checkOtpCode: () -> Unit,
@@ -49,15 +41,15 @@ fun VerifyCodeStateScreen(
 			.align(Alignment.CenterHorizontally)
 			.fillMaxWidth(0.7f)
 
-		PhoneInputField(modifier = centerModifier, phone = state.phone, changePhone = changePhone)
+		PhoneInputField(modifier = centerModifier, phone = phone, changePhone = changePhone)
 		Spacer(modifier = Modifier.height(16.dp))
-		CodeInputField(modifier = centerModifier, code = state.code, changeCode = changeCode, maxLength = 6)
+		CodeInputField(modifier = centerModifier, code = code, changeCode = changeCode, maxLength = 6)
 		Spacer(modifier = Modifier.height(24.dp))
 		ResendCodeButton(modifier = centerModifier, resendOtpCodeAction = resendOtpCode)
 		Spacer(modifier = Modifier.height(16.dp))
 		LegalText(modifier = centerModifier)
 		Spacer(modifier = Modifier.height(24.dp))
-		CheckCodeButton(modifier = centerModifier, checkOtpCodeAction = checkOtpCode, enabled = validate(state.phone))
+		CheckCodeButton(modifier = centerModifier, checkOtpCodeAction = checkOtpCode, enabled = validate(phone))
 		Divider()
 		SocialNetworkSign(onFbSignClick, onVkSignClick, onGoogleSignClick)
 	}

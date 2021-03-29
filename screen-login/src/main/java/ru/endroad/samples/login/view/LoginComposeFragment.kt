@@ -28,26 +28,7 @@ class LoginComposeFragment : Fragment() {
 	fun App(stateFlow: StateFlow<LoginScreenState>) {
 		MaterialTheme {
 			Scaffold {
-				when (val state = stateFlow.collectAsState().value) {
-					is LoginScreenState.Initialized -> InitializedStateScreen(
-						state,
-						onChangeText = { viewModel.notice(LoginScreenEvent.ChangePhone(it)) },
-						onSendOtpCode = { viewModel.notice(LoginScreenEvent.ClickSendOtpCode) },
-						onFbSignClick = { viewModel.notice(LoginScreenEvent.ClickFacebookSign) },
-						onVkSignClick = { viewModel.notice(LoginScreenEvent.ClickVkontakteSign) },
-						onGoogleSignClick = { viewModel.notice(LoginScreenEvent.ClickGoogleSign) },
-					)
-					is LoginScreenState.VerifyCode -> VerifyCodeStateScreen(
-						state = state,
-						changePhone = { viewModel.notice(LoginScreenEvent.ChangePhone(it)) },
-						changeCode = { viewModel.notice(LoginScreenEvent.ChangeCode(it)) },
-						checkOtpCode = { viewModel.notice(LoginScreenEvent.ClickCheckOtpCode) },
-						resendOtpCode = { viewModel.notice(LoginScreenEvent.ClickResendCode) },
-						onFbSignClick = { viewModel.notice(LoginScreenEvent.ClickFacebookSign) },
-						onVkSignClick = { viewModel.notice(LoginScreenEvent.ClickVkontakteSign) },
-						onGoogleSignClick = { viewModel.notice(LoginScreenEvent.ClickGoogleSign) },
-					)
-				}
+				stateFlow.collectAsState().value.RenderUI()
 			}
 		}
 	}
