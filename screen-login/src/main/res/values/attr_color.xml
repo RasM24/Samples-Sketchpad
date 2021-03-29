@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<attr name="gradientGrayStart" format="color" />
-	<attr name="gradientGrayEnd" format="color" />
-</resources>
