@@ -1,7 +1,14 @@
 package ru.endroad.samples.login.application
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.compose.animation.Crossfade
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.runtime.collectAsState
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.endroad.component.core.CampActivity
 import ru.endroad.samples.login.R
 import ru.endroad.samples.login.router.navigator.Navigator
@@ -17,12 +24,25 @@ class SingleActivity : CampActivity() {
 	override val layout = R.layout.hub_activity
 	override val theme = R.style.AppTheme
 
-	val navigator: Navigator by inject()
-	val mainRouter: MainRouter by inject()
+	private val navigator: Navigator by inject()
+	private val mainRouter: MainRouter by inject()
+
+	private val navigationViewModel: NavigationViewModel by viewModel()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		navigator.hubActivity = this
+		navigator.navigationViewModel = this.navigationViewModel
 		super.onCreate(savedInstanceState)
+
+		setContent {
+			MaterialTheme {
+				Scaffold {
+					Crossfade(navigationViewModel.currentScreen) { screen ->
+						screen.collectAsState().value.RenderScreen()
+					}
+				}
+			}
+		}
 	}
 
 	override fun onDestroy() {

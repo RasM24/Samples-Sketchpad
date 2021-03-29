@@ -1,35 +1,14 @@
 package ru.endroad.samples.login.view
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.Fragment
-import kotlinx.coroutines.flow.StateFlow
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.endroad.samples.login.experiment.Scene
+import ru.endroad.samples.login.experiment.inject
 
-class LoginComposeFragment : Fragment() {
+class LoginComposeFragment : Scene() {
 
-	private val viewModel: LoginViewModel by viewModel()
-
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-		ComposeView(requireContext()).apply {
-			setContent {
-				App(viewModel.state)
-			}
-		}
+	private val viewModel: LoginViewModel by inject()
 
 	@Composable
-	fun App(stateFlow: StateFlow<LoginScreenState>) {
-		MaterialTheme {
-			Scaffold {
-				stateFlow.collectAsState().value.RenderUI()
-			}
-		}
-	}
+	override fun RenderScreen() = viewModel.state.collectAsState().value.RenderUI()
 }

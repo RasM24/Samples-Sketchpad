@@ -4,30 +4,22 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.endroad.component.core.*
+import ru.endroad.samples.login.application.NavigationViewModel
 import ru.endroad.samples.login.error.DomainError
+import ru.endroad.samples.login.experiment.Scene
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 interface Navigator {
-	val container: Int
+
 	var hubActivity: AppCompatActivity?
+	var navigationViewModel: NavigationViewModel?
 
-	fun open(fragment: Fragment) {
-		hubActivity?.supportFragmentManager?.forwardTo(fragment, defaultForwardAnimation, container)
+	fun changeRoot(screen: Scene) {
+		navigationViewModel?.currentScreen?.tryEmit(screen)
 	}
 
-	fun replace(fragment: Fragment) {
-		hubActivity?.supportFragmentManager?.replace(fragment, defaultReplaceAnimation, container)
-	}
-
-	fun changeRoot(fragment: Fragment) {
-		hubActivity?.supportFragmentManager?.changeRoot(fragment, defaultReplaceAnimation, container)
-	}
-
-	fun back() {
-		hubActivity?.supportFragmentManager?.back()
-	}
 
 	fun openNoticeAlertDialog(message: String) {
 		hubActivity?.let(AlertDialog::Builder)?.apply {

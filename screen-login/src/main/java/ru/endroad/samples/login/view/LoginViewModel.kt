@@ -3,9 +3,8 @@ package ru.endroad.samples.login.view
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import ru.endroad.component.core.MviViewModel
 import ru.endroad.samples.login.error.DomainError
 import ru.endroad.samples.login.router.routers.LoginRouter
@@ -25,12 +24,12 @@ class LoginViewModel(
 	private val signWithGoogle: SignWithGoogleUseCase,
 	private val signWithVkontakte: SignWithVkontakteUseCase,
 	private val router: LoginRouter
-) : MviViewModel<LoginScreenState, LoginScreenEvent>, ViewModel() {
+) : MviViewModel<LoginScreenState, LoginScreenEvent> {
 
 	override val state = MutableStateFlow<LoginScreenState>(LoginScreenState.Initialized("", ::notice))
 
 	override fun notice(event: LoginScreenEvent) {
-		viewModelScope.launch(exceptionHandler) {
+		CoroutineScope(Dispatchers.Main).launch(exceptionHandler) {
 			when (event) {
 				LoginScreenEvent.ClickFacebookSign  -> successLogin(signWithFacebook().token)
 				LoginScreenEvent.ClickGoogleSign    -> successLogin(signWithGoogle().token)
