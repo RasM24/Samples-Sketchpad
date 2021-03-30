@@ -1,4 +1,4 @@
-package ru.endroad.sample.screen.navigation.feature.navigation
+package ru.endroad.sample.screen.navigation.application
 
 interface MainNavigationRouter {
 

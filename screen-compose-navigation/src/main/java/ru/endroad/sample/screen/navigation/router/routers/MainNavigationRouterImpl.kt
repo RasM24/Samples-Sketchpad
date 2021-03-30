@@ -4,7 +4,7 @@ import org.koin.java.KoinJavaComponent.inject
 import ru.endroad.sample.screen.navigation.feature.alphabet.AlphabetDestination
 import ru.endroad.sample.screen.navigation.feature.colored.colored.ColoredDestination
 import ru.endroad.sample.screen.navigation.feature.external.fragment.ExternalLinksDestination
-import ru.endroad.sample.screen.navigation.feature.navigation.MainNavigationRouter
+import ru.endroad.sample.screen.navigation.application.MainNavigationRouter
 import ru.endroad.sample.screen.navigation.router.command.Command
 import ru.endroad.sample.screen.navigation.router.di.contentNavigatorQualifier
 import ru.endroad.sample.screen.navigation.router.navigator.Navigator
