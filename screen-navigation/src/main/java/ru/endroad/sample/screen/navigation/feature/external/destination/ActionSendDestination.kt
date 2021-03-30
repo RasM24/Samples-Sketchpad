@@ -10,6 +10,7 @@ class ActionSendDestination(
 
 	override fun createIntent(): Intent =
 		Intent.createChooser(actionSendIntent, title)
+			.apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
 
 	private val actionSendIntent: Intent
 		get() = Intent(Intent.ACTION_SEND).apply {

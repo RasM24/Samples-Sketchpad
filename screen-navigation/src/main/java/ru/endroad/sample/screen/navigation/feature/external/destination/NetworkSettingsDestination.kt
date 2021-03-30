@@ -8,4 +8,5 @@ object NetworkSettingsDestination : SystemDestination {
 
 	override fun createIntent(): Intent =
 		Intent(Settings.ACTION_WIRELESS_SETTINGS)
+			.apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
 }
