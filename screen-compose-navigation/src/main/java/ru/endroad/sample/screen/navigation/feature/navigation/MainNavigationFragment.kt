@@ -1,65 +1,112 @@
 package ru.endroad.sample.screen.navigation.feature.navigation
 
-import android.view.MenuItem
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.StringRes
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.OfflineShare
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.main_navigation_fragment.*
 import org.koin.android.ext.android.inject
-import ru.endroad.component.core.CampFragment
 import ru.endroad.sample.screen.navigation.R
+import ru.endroad.sample.screen.navigation.migrate.composeFragmentView
 import ru.endroad.sample.screen.navigation.utils.withArguments
 
-class MainNavigationFragment : CampFragment(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainNavigationFragment : Fragment() {
 
 	companion object {
 
-		private const val INITIAL_SCREEN_KEY = "INITIAL_SCREEN"
+		private const val INITIAL_TAB_KEY = "INITIAL_TAB"
 
-		fun create(initialScreen: Int): Fragment =
+		fun create(initialTab: NavigationTab): Fragment =
 			MainNavigationFragment().withArguments(
-				INITIAL_SCREEN_KEY to initialScreen
+				INITIAL_TAB_KEY to initialTab
 			)
 	}
 
-	override val layout = R.layout.main_navigation_fragment
-
 	private val router: MainNavigationRouter by inject()
 
-	private val initialScreen: Int
-		get() = requireArguments().getInt(INITIAL_SCREEN_KEY)
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+		composeFragmentView {
+			val backStackCount = 0 //TODO использовать remember
+			val title = "Title" //TODO использовать remember
 
-	override fun setupViewComponents() {
-		requireAppCompatActivity().setupToolbar()
-		navigation_view.setOnNavigationItemSelectedListener(this)
-		navigation_view.selectedItemId = initialScreen
-	}
-
-	override fun onNavigationItemSelected(item: MenuItem): Boolean {
-		when (item.itemId) {
-			R.id.navigation_alphabet -> router.openAlphabetScreen()
-			R.id.navigation_colored -> router.openColoredScreen()
-			R.id.navigation_external -> router.openExternalLinksScreen()
-			else                     -> return false
+			Scaffold(
+				topBar = { AppBar(title = title, backStackCount = backStackCount, onNavigationClick = { }) },
+				bottomBar = { BottomBar(onSelectedTab = ::onNavigationItemSelected) },
+			) {
+				//TODO добавить контент
+			}
 		}
 
-		return true
-	}
-
-	private fun requireAppCompatActivity() =
-		requireActivity() as AppCompatActivity
-
-	private fun AppCompatActivity.setupToolbar() {
-		setSupportActionBar(toolbar)
-		toolbar.setNavigationOnClickListener { onBackPressed() }
-		supportFragmentManager.addOnBackStackChangedListener {
-			supportActionBar?.setHomeEnabled()
+	@Composable
+	private fun AppBar(title: String, backStackCount: Int, onNavigationClick: () -> Unit) = TopAppBar(
+		title = { Text(text = title) },
+		navigationIcon = {
+			if (backStackCount != 0) {
+				IconButton(onClick = onNavigationClick) {
+					Icon(
+						imageVector = Icons.Filled.ArrowBack,
+						contentDescription = "Navigation"
+					)
+				}
+			}
 		}
-		supportActionBar?.setHomeEnabled()
+	)
+
+	@Composable
+	private fun BottomBar(onSelectedTab: (NavigationTab) -> Unit) = BottomNavigation {
+		BottomBarItem(onClick = { onSelectedTab(NavigationTab.ALPHABET) }, icon = Icons.Outlined.Home, descriptionRes = R.string.title_alphabet)
+		BottomBarItem(onClick = { onSelectedTab(NavigationTab.COLORED) }, icon = Icons.Outlined.Apps, descriptionRes = R.string.title_colored)
+		BottomBarItem(onClick = { onSelectedTab(NavigationTab.EXTERNAL) }, icon = Icons.Outlined.OfflineShare, descriptionRes = R.string.title_external)
 	}
 
-	private fun ActionBar.setHomeEnabled() {
-		this.setDisplayHomeAsUpEnabled(requireFragmentManager().backStackEntryCount != 0)
+	@Composable
+	private fun BottomBarItem(onClick: () -> Unit, icon: ImageVector, @StringRes descriptionRes: Int) {
+		IconButton(onClick = onClick) {
+			Icon(
+				imageVector = icon,
+				contentDescription = stringResource(descriptionRes)
+			)
+		}
 	}
+
+
+	//	override fun setupViewComponents() {
+//		requireAppCompatActivity().setupToolbar()
+//		navigation_view.setOnNavigationItemSelectedListener(this)
+//		navigation_view.selectedItemId = initialScreen
+//	}
+//
+	private fun onNavigationItemSelected(tab: NavigationTab) {
+		when (tab) {
+//			NavigationTab.ALPHABET -> router.openAlphabetScreen()
+//			NavigationTab.COLORED  -> router.openColoredScreen()
+//			NavigationTab.EXTERNAL -> router.openExternalLinksScreen()
+		}
+	}
+//
+//	private fun requireAppCompatActivity() =
+//		requireActivity() as AppCompatActivity
+//
+//	private fun AppCompatActivity.setupToolbar() {
+//		setSupportActionBar(toolbar)
+//		toolbar.setNavigationOnClickListener { onBackPressed() }
+//		supportFragmentManager.addOnBackStackChangedListener {
+//			supportActionBar?.setHomeEnabled()
+//		}
+//		supportActionBar?.setHomeEnabled()
+//	}
+//
+//	private fun ActionBar.setHomeEnabled() {
+//		this.setDisplayHomeAsUpEnabled(requireFragmentManager().backStackEntryCount != 0)
+//	}
 }
