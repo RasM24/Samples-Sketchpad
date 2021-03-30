@@ -1,10 +1,10 @@
 package ru.endroad.sample.screen.navigation.feature.alphabet
 
-import androidx.fragment.app.Fragment
-import ru.endroad.sample.screen.navigation.router.destination.FragmentDestination
+import ru.endroad.sample.screen.navigation.utils.Scene
+import ru.endroad.sample.screen.navigation.router.destination.SceneDestination
 
-object AlphabetDestination : FragmentDestination {
+object AlphabetDestination : SceneDestination {
 
-	override fun createFragment(): Fragment =
-		AlphabetFragment()
+	override fun createScene(): Scene =
+		AlphabetScene()
 }

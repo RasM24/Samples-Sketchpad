@@ -1,10 +1,10 @@
 package ru.endroad.sample.screen.navigation.feature.colored.green
 
-import androidx.fragment.app.Fragment
-import ru.endroad.sample.screen.navigation.router.destination.FragmentDestination
+import ru.endroad.sample.screen.navigation.utils.Scene
+import ru.endroad.sample.screen.navigation.router.destination.SceneDestination
 
-object GreenDestination : FragmentDestination {
+object GreenDestination : SceneDestination {
 
-	override fun createFragment(): Fragment =
-		GreenFragment()
+	override fun createScene(): Scene =
+		GreenScene()
 }

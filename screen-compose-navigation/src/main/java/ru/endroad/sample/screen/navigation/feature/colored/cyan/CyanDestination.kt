@@ -1,10 +1,10 @@
 package ru.endroad.sample.screen.navigation.feature.colored.cyan
 
-import androidx.fragment.app.Fragment
-import ru.endroad.sample.screen.navigation.router.destination.FragmentDestination
+import ru.endroad.sample.screen.navigation.utils.Scene
+import ru.endroad.sample.screen.navigation.router.destination.SceneDestination
 
-object CyanDestination : FragmentDestination {
+object CyanDestination : SceneDestination {
 
-	override fun createFragment(): Fragment =
-		CyanFragment()
+	override fun createScene(): Scene =
+		CyanScene()
 }

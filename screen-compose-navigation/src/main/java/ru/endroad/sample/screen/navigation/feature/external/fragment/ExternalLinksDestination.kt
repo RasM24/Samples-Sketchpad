@@ -1,10 +1,10 @@
 package ru.endroad.sample.screen.navigation.feature.external.fragment
 
-import androidx.fragment.app.Fragment
-import ru.endroad.sample.screen.navigation.router.destination.FragmentDestination
+import ru.endroad.sample.screen.navigation.utils.Scene
+import ru.endroad.sample.screen.navigation.router.destination.SceneDestination
 
-object ExternalLinksDestination : FragmentDestination {
+object ExternalLinksDestination : SceneDestination {
 
-	override fun createFragment(): Fragment =
-		ExternalLinksFragment()
+	override fun createScene(): Scene =
+		ExternalLinksScene()
 }
