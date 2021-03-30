@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.Crossfade
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -11,24 +12,33 @@ import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.OfflineShare
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.endroad.sample.screen.navigation.R
+import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandExecutor
 import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandStack
+import ru.endroad.sample.screen.navigation.router.navigator.NavigationScenesStack
 
 @InternalCoroutinesApi
 class SingleActivity : AppCompatActivity() {
 
 	private val navigator: NavigationCommandStack by inject()
+	private val commandExecutor: NavigationCommandExecutor by inject()
 
 	private val router: MainNavigationRouter by inject()
 
+	private val navigationScenesStack: NavigationScenesStack by viewModel()
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		commandExecutor.stack = navigationScenesStack
 		setContent {
 			MaterialTheme {
 				val backStackCount = 0 //TODO использовать remember
@@ -38,7 +48,9 @@ class SingleActivity : AppCompatActivity() {
 					topBar = { AppBar(title = title, backStackCount = backStackCount, onNavigationClick = { }) },
 					bottomBar = { BottomBar(onSelectedTab = ::onNavigationItemSelected) },
 				) {
-					//TODO добавить контент
+					Crossfade(navigationScenesStack.currentScreen) { screen ->
+						screen.collectAsState().value.RenderScreen()
+					}
 				}
 			}
 		}
@@ -90,9 +102,9 @@ class SingleActivity : AppCompatActivity() {
 //
 	private fun onNavigationItemSelected(tab: NavigationTab) {
 		when (tab) {
-//			NavigationTab.ALPHABET -> router.openAlphabetScreen()
-//			NavigationTab.COLORED  -> router.openColoredScreen()
-//			NavigationTab.EXTERNAL -> router.openExternalLinksScreen()
+			NavigationTab.ALPHABET -> router.openAlphabetScreen()
+			NavigationTab.COLORED -> router.openColoredScreen()
+			NavigationTab.EXTERNAL -> router.openExternalLinksScreen()
 		}
 	}
 //

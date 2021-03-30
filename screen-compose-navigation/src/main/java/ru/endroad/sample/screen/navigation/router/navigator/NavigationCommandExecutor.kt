@@ -7,9 +7,9 @@ import ru.endroad.sample.screen.navigation.router.command.Command
 import ru.endroad.sample.screen.navigation.router.destination.*
 import ru.endroad.sample.screen.navigation.router.manager.*
 
-class NavigationCommandExecutor(
-	private val stack: NavigationScenesStack,
-) {
+class NavigationCommandExecutor {
+
+	var stack :NavigationScenesStack? = null
 
 	fun execute(command: Command, activity: AppCompatActivity, container: Int) {
 		when (command) {
@@ -37,7 +37,7 @@ class NavigationCommandExecutor(
 
 	private fun changeRoot(destination: Destination, fragmentManager: FragmentManager, container: Int) {
 		when (destination) {
-			is SceneDestination    -> stack.currentScreen.tryEmit(destination.createScene())
+			is SceneDestination    -> stack?.currentScreen?.tryEmit(destination.createScene())
 			is FragmentDestination -> fragmentManager.changeRoot(destination.createFragment(), defaultReplaceAnimation, container)
 			is ActivityDestination -> TODO("Not implemented")
 		}
