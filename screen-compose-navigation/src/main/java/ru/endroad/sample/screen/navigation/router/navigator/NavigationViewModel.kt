@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import ru.endroad.sample.screen.navigation.utils.Scene
 
 class NavigationScenesStack : ViewModel() {
@@ -17,7 +18,26 @@ class NavigationScenesStack : ViewModel() {
 		override fun RenderScreen() = RenderStubView()
 	}
 
-	var currentScreen: MutableStateFlow<Scene> = MutableStateFlow(initialScene)
+	private var stackScenes: MutableList<Scene> = mutableListOf(initialScene)
+
+	private val _currentScreen: MutableStateFlow<Scene> = MutableStateFlow(initialScene)
+	val currentScreen: StateFlow<Scene> = _currentScreen
+
+	fun changeStack(scene: Scene) {
+		stackScenes = mutableListOf(scene)
+		_currentScreen.tryEmit(scene)
+	}
+
+	fun openScreen(scene: Scene) {
+		stackScenes.add(scene)
+		_currentScreen.tryEmit(scene)
+	}
+
+	fun replaceScreen(scene: Scene) {
+		stackScenes.remove(stackScenes.last())
+		stackScenes.add(scene)
+		_currentScreen.tryEmit(scene)
+	}
 }
 
 @Composable

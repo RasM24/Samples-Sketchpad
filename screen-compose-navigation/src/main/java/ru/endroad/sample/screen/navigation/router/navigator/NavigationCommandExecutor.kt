@@ -21,10 +21,11 @@ class NavigationCommandExecutor {
 
 	private fun open(destination: Destination, context: Context, fragmentManager: FragmentManager, container: Int) {
 		when (destination) {
-			is FragmentDestination -> fragmentManager.forwardTo(destination.createFragment(), defaultForwardAnimation, container)
+			is FragmentDestination       -> fragmentManager.forwardTo(destination.createFragment(), defaultForwardAnimation, container)
 			is DialogFragmentDestination -> fragmentManager.showNowDialog(destination.createFragment())
-			is ActivityDestination -> context.startActivity(destination.createIntent())
-			is SystemDestination -> context.startActivity(destination.createIntent())
+			is ActivityDestination       -> context.startActivity(destination.createIntent())
+			is SystemDestination         -> context.startActivity(destination.createIntent())
+			is SceneDestination          -> stack?.openScreen(destination.createScene())
 		}
 	}
 
@@ -32,12 +33,13 @@ class NavigationCommandExecutor {
 		when (destination) {
 			is FragmentDestination -> fragmentManager.replace(destination.createFragment(), defaultReplaceAnimation, container)
 			is ActivityDestination -> TODO("Not implemented")
+			is SceneDestination    -> stack?.replaceScreen(destination.createScene())
 		}
 	}
 
 	private fun changeRoot(destination: Destination, fragmentManager: FragmentManager, container: Int) {
 		when (destination) {
-			is SceneDestination    -> stack?.currentScreen?.tryEmit(destination.createScene())
+			is SceneDestination    -> stack?.changeStack(destination.createScene())
 			is FragmentDestination -> fragmentManager.changeRoot(destination.createFragment(), defaultReplaceAnimation, container)
 			is ActivityDestination -> TODO("Not implemented")
 		}
