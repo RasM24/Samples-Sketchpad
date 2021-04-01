@@ -1,4 +1,5 @@
 rootProject.name = 'Samples-Sketchpad'
+include ':screen-compose-navigation'
 include ':screen-game'
 include ':screen-login'
 include ':screen-listing'

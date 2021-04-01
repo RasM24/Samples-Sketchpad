@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:id="@+id/navigation_alphabet"
+		android:icon="@drawable/ic_alphabet"
+		android:title="@string/title_alphabet" />
+
+	<item
+		android:id="@+id/navigation_colored"
+		android:icon="@drawable/ic_colored"
+		android:title="@string/title_colored" />
+
+	<item
+		android:id="@+id/navigation_external"
+		android:icon="@drawable/ic_external"
+		android:title="@string/title_external" />
+
+</menu>
