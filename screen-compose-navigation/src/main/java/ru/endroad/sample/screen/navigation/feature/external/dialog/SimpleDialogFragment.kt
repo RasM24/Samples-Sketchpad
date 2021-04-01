@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.simple_dialog_fragment.*
 import ru.endroad.sample.screen.navigation.R
-import ru.endroad.sample.screen.navigation.utils.withArguments
 
 class SimpleDialogFragment : AppCompatDialogFragment() {
 
@@ -19,10 +19,12 @@ class SimpleDialogFragment : AppCompatDialogFragment() {
 		private const val MESSAGE_KEY = "MESSAGE_SCREEN"
 
 		fun create(toolbarText: String, message: String): DialogFragment =
-			SimpleDialogFragment().withArguments(
-				TOOLBAR_TEXT_KEY to toolbarText,
-				MESSAGE_KEY to message,
-			)
+			SimpleDialogFragment().apply {
+				arguments = bundleOf(
+					TOOLBAR_TEXT_KEY to toolbarText,
+					MESSAGE_KEY to message,
+				)
+			}
 	}
 
 	private val toolbarText: String

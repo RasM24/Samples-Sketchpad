@@ -8,50 +8,49 @@ import ru.endroad.sample.screen.navigation.feature.colored.green.GreenDestinatio
 import ru.endroad.sample.screen.navigation.feature.colored.magenta.MagentaDestination
 import ru.endroad.sample.screen.navigation.feature.colored.red.RedDestination
 import ru.endroad.sample.screen.navigation.router.command.Command
-import ru.endroad.sample.screen.navigation.router.di.contentNavigatorQualifier
 import ru.endroad.sample.screen.navigation.router.navigator.Navigator
 
 class ColoredRouterImpl : ColoredRouter {
 
-	private val contentNavigator: Navigator by inject(Navigator::class.java, contentNavigatorQualifier)
+	private val navigator by inject(Navigator::class.java)
 
 	override fun openRedScreen() {
-		contentNavigator.execute(Command.Open(RedDestination))
+		navigator.execute(Command.Open(RedDestination))
 	}
 
 	override fun replaceRedScreen() {
-		contentNavigator.execute(Command.Replace(RedDestination))
+		navigator.execute(Command.Replace(RedDestination))
 	}
 
 	override fun openMagentaScreen() {
-		contentNavigator.execute(Command.Open(MagentaDestination))
+		navigator.execute(Command.Open(MagentaDestination))
 	}
 
 	override fun replaceMagentaScreen() {
-		contentNavigator.execute(Command.Replace(MagentaDestination))
+		navigator.execute(Command.Replace(MagentaDestination))
 	}
 
 	override fun openGreenScreen() {
-		contentNavigator.execute(Command.Open(GreenDestination))
+		navigator.execute(Command.Open(GreenDestination))
 	}
 
 	override fun replaceGreenScreen() {
-		contentNavigator.execute(Command.Replace(GreenDestination))
+		navigator.execute(Command.Replace(GreenDestination))
 	}
 
 	override fun openCyanScreen() {
-		contentNavigator.execute(Command.Open(CyanDestination))
+		navigator.execute(Command.Open(CyanDestination))
 	}
 
 	override fun replaceCyanScreen() {
-		contentNavigator.execute(Command.Replace(CyanDestination))
+		navigator.execute(Command.Replace(CyanDestination))
 	}
 
 	override fun openBlueScreen() {
-		contentNavigator.execute(Command.Open(BlueDestination))
+		navigator.execute(Command.Open(BlueDestination))
 	}
 
 	override fun replaceBlueScreen() {
-		contentNavigator.execute(Command.Replace(BlueDestination))
+		navigator.execute(Command.Replace(BlueDestination))
 	}
 }
