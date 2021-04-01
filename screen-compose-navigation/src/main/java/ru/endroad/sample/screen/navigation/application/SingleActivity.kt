@@ -38,14 +38,13 @@ class SingleActivity : AppCompatActivity() {
 			MaterialTheme {
 				val backStackCount = 0 //TODO использовать remember
 				val title = "Title" //TODO использовать remember
+				val stateScreen = manager.currentScreen.collectAsState().value
 
 				Scaffold(
 					topBar = { AppBar(title = title, backStackCount = backStackCount, onNavigationClick = { }) },
 					bottomBar = { BottomBar(onSelectedTab = ::onNavigationItemSelected) },
 				) {
-					Crossfade(manager.currentScreen) { screen ->
-						screen.collectAsState().value.RenderScreen()
-					}
+					Crossfade(targetState = stateScreen) { screen -> screen.RenderScreen() }
 				}
 			}
 		}
