@@ -10,8 +10,9 @@ import ru.endroad.sample.screen.navigation.R
 import ru.endroad.sample.screen.navigation.utils.Scene
 
 class AlphabetScene : Scene() {
-	//TODO
-	// requireActivity().title = getString(R.string.title_alphabet)
+
+	@Composable
+	override fun getTitle() = stringResource(id = R.string.title_alphabet)
 
 	@Composable
 	override fun RenderScreen() =

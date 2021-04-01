@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -36,12 +37,10 @@ class SingleActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContent {
 			MaterialTheme {
-				val backStackCount = 0 //TODO использовать remember
-				val title = "Title" //TODO использовать remember
 				val stateScreen = manager.currentScreen.collectAsState().value
 
 				Scaffold(
-					topBar = { AppBar(title = title, backStackCount = backStackCount, onNavigationClick = { }) },
+					topBar = { AppBar(title = stateScreen.getTitle(), backStackCount = manager.stackScenes.lastIndex, onNavigationClick = ::onBackPressed) },
 					bottomBar = { BottomBar(onSelectedTab = ::onNavigationItemSelected) },
 				) {
 					Crossfade(targetState = stateScreen) { screen -> screen.RenderScreen() }
@@ -58,17 +57,18 @@ class SingleActivity : AppCompatActivity() {
 	@Composable
 	private fun AppBar(title: String, backStackCount: Int, onNavigationClick: () -> Unit) = TopAppBar(
 		title = { Text(text = title) },
-		navigationIcon = {
-			if (backStackCount != 0) {
-				IconButton(onClick = onNavigationClick) {
-					Icon(
-						imageVector = Icons.Filled.ArrowBack,
-						contentDescription = "Navigation"
-					)
-				}
-			}
-		}
+		navigationIcon = NavigationIconComposable(onNavigationClick).takeIf { backStackCount != 0 }
 	)
+
+	@Composable
+	fun NavigationIconComposable(onNavigationClick: () -> Unit): @Composable () -> Unit = {
+		IconButton(onClick = onNavigationClick) {
+			Icon(
+				imageVector = Icons.Filled.ArrowBack,
+				contentDescription = "Navigation"
+			)
+		}
+	}
 
 	@Composable
 	private fun BottomBar(onSelectedTab: (NavigationTab) -> Unit) = BottomNavigation {

@@ -18,8 +18,8 @@ class ExternalLinksScene : Scene() {
 
 	private val router by inject(ExternalLinksRouter::class.java)
 
-	//TODO
-	// requireActivity().title = getString(R.string.title_external)
+	@Composable
+	override fun getTitle() = stringResource(id = R.string.title_external)
 
 	@Composable
 	override fun RenderScreen() =

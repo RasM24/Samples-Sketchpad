@@ -14,6 +14,10 @@ class NavigationManager {
 
 	@Deprecated("разобраться с первым фрагментов")
 	private val initialScene = object : Scene() {
+
+		@Composable
+		override fun getTitle() = "Stub Scene"
+
 		@Composable
 		override fun RenderScreen() = RenderStubView()
 	}
