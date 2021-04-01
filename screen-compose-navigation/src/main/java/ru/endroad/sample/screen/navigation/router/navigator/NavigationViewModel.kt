@@ -38,6 +38,16 @@ class NavigationScenesStack : ViewModel() {
 		stackScenes.add(scene)
 		_currentScreen.tryEmit(scene)
 	}
+
+	fun back(): Boolean {
+		return if (stackScenes.size > 1) {
+			stackScenes.remove(stackScenes.last())
+			_currentScreen.tryEmit(stackScenes.last())
+			true
+		} else {
+			false
+		}
+	}
 }
 
 @Composable

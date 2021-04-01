@@ -123,4 +123,10 @@ class SingleActivity : AppCompatActivity() {
 //	private fun ActionBar.setHomeEnabled() {
 //		this.setDisplayHomeAsUpEnabled(requireFragmentManager().backStackEntryCount != 0)
 //	}
+
+	override fun onBackPressed() {
+		if (!navigationScenesStack.back()) {
+			super.onBackPressed()
+		}
+	}
 }
