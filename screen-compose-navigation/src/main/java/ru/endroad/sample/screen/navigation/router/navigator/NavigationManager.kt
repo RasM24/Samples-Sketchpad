@@ -18,7 +18,8 @@ class NavigationManager {
 		override fun RenderScreen() = RenderStubView()
 	}
 
-	private var stackScenes: MutableList<Scene> = mutableListOf(initialScene)
+	var stackScenes: MutableList<Scene> = mutableListOf(initialScene)
+		private set
 
 	private val _currentScreen: MutableStateFlow<Scene> = MutableStateFlow(initialScene)
 	val currentScreen: StateFlow<Scene> = _currentScreen
@@ -34,19 +35,27 @@ class NavigationManager {
 	}
 
 	fun replaceScreen(scene: Scene) {
-		stackScenes.remove(stackScenes.last())
+		stackScenes.removeLast()
 		stackScenes.add(scene)
 		_currentScreen.tryEmit(scene)
 	}
 
 	fun back(): Boolean {
 		return if (stackScenes.size > 1) {
-			stackScenes.remove(stackScenes.last())
+			stackScenes.removeLast()
 			_currentScreen.tryEmit(stackScenes.last())
 			true
 		} else {
 			false
 		}
+	}
+}
+
+fun NavigationManager.stackState() = buildString {
+	appendLine("navigation stack:")
+	stackScenes.forEachIndexed { index, scene ->
+		if (index == stackScenes.lastIndex) append("-> ")
+		appendLine(scene::class.simpleName)
 	}
 }
 
