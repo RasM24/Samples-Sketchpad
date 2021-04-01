@@ -3,13 +3,14 @@ package ru.endroad.sample.screen.navigation.router.navigator
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import org.koin.java.KoinJavaComponent.inject
 import ru.endroad.sample.screen.navigation.router.command.Command
 import ru.endroad.sample.screen.navigation.router.destination.*
 import ru.endroad.sample.screen.navigation.router.manager.*
 
 class NavigationCommandExecutor {
 
-	var stack :NavigationScenesStack? = null
+	private val manager by inject(NavigationManager::class.java)
 
 	fun execute(command: Command, activity: AppCompatActivity, container: Int) {
 		when (command) {
@@ -25,7 +26,7 @@ class NavigationCommandExecutor {
 			is DialogFragmentDestination -> fragmentManager.showNowDialog(destination.createFragment())
 			is ActivityDestination       -> context.startActivity(destination.createIntent())
 			is SystemDestination         -> context.startActivity(destination.createIntent())
-			is SceneDestination          -> stack?.openScreen(destination.createScene())
+			is SceneDestination          -> manager.openScreen(destination.createScene())
 		}
 	}
 
@@ -33,13 +34,13 @@ class NavigationCommandExecutor {
 		when (destination) {
 			is FragmentDestination -> fragmentManager.replace(destination.createFragment(), defaultReplaceAnimation, container)
 			is ActivityDestination -> TODO("Not implemented")
-			is SceneDestination    -> stack?.replaceScreen(destination.createScene())
+			is SceneDestination    -> manager.replaceScreen(destination.createScene())
 		}
 	}
 
 	private fun changeRoot(destination: Destination, fragmentManager: FragmentManager, container: Int) {
 		when (destination) {
-			is SceneDestination    -> stack?.changeStack(destination.createScene())
+			is SceneDestination    -> manager.changeStack(destination.createScene())
 			is FragmentDestination -> fragmentManager.changeRoot(destination.createFragment(), defaultReplaceAnimation, container)
 			is ActivityDestination -> TODO("Not implemented")
 		}

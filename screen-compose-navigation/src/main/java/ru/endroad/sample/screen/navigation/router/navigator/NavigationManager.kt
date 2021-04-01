@@ -6,13 +6,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.endroad.sample.screen.navigation.utils.Scene
 
-class NavigationScenesStack : ViewModel() {
+class NavigationManager {
 
+	@Deprecated("разобраться с первым фрагментов")
 	private val initialScene = object : Scene() {
 		@Composable
 		override fun RenderScreen() = RenderStubView()

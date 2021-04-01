@@ -17,28 +17,23 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.endroad.sample.screen.navigation.R
-import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandExecutor
 import ru.endroad.sample.screen.navigation.router.navigator.NavigationCommandStack
-import ru.endroad.sample.screen.navigation.router.navigator.NavigationScenesStack
+import ru.endroad.sample.screen.navigation.router.navigator.NavigationManager
 
 @InternalCoroutinesApi
 class SingleActivity : AppCompatActivity() {
 
 	private val navigator: NavigationCommandStack by inject()
-	private val commandExecutor: NavigationCommandExecutor by inject()
 
 	private val router: MainNavigationRouter by inject()
 
-	private val navigationScenesStack: NavigationScenesStack by viewModel()
+	private val manager: NavigationManager by inject()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		commandExecutor.stack = navigationScenesStack
 		setContent {
 			MaterialTheme {
 				val backStackCount = 0 //TODO использовать remember
@@ -48,7 +43,7 @@ class SingleActivity : AppCompatActivity() {
 					topBar = { AppBar(title = title, backStackCount = backStackCount, onNavigationClick = { }) },
 					bottomBar = { BottomBar(onSelectedTab = ::onNavigationItemSelected) },
 				) {
-					Crossfade(navigationScenesStack.currentScreen) { screen ->
+					Crossfade(manager.currentScreen) { screen ->
 						screen.collectAsState().value.RenderScreen()
 					}
 				}
@@ -93,13 +88,6 @@ class SingleActivity : AppCompatActivity() {
 		}
 	}
 
-
-	//	override fun setupViewComponents() {
-//		requireAppCompatActivity().setupToolbar()
-//		navigation_view.setOnNavigationItemSelectedListener(this)
-//		navigation_view.selectedItemId = initialScreen
-//	}
-//
 	private fun onNavigationItemSelected(tab: NavigationTab) {
 		when (tab) {
 			NavigationTab.ALPHABET -> router.openAlphabetScreen()
@@ -107,25 +95,9 @@ class SingleActivity : AppCompatActivity() {
 			NavigationTab.EXTERNAL -> router.openExternalLinksScreen()
 		}
 	}
-//
-//	private fun requireAppCompatActivity() =
-//		requireActivity() as AppCompatActivity
-//
-//	private fun AppCompatActivity.setupToolbar() {
-//		setSupportActionBar(toolbar)
-//		toolbar.setNavigationOnClickListener { onBackPressed() }
-//		supportFragmentManager.addOnBackStackChangedListener {
-//			supportActionBar?.setHomeEnabled()
-//		}
-//		supportActionBar?.setHomeEnabled()
-//	}
-//
-//	private fun ActionBar.setHomeEnabled() {
-//		this.setDisplayHomeAsUpEnabled(requireFragmentManager().backStackEntryCount != 0)
-//	}
 
 	override fun onBackPressed() {
-		if (!navigationScenesStack.back()) {
+		if (!manager.back()) {
 			super.onBackPressed()
 		}
 	}
